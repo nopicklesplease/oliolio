@@ -1,0 +1,94 @@
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid blue; */
+}
+
+#body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background-color: black;
+    height: 100%;
+}
+
+.container{
+    width: auto;
+    height: auto;
+    padding: 40px;
+}
+
+.panel{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.panel p{
+    color: white;
+    font-family: "League Spartan";
+    font-weight: 200;
+    font-size: 4rem;
+    margin: 0;
+    margin-bottom: -.5rem;
+    padding: 0 15px 0 0;
+}
+
+.btn{
+    color: white;
+    border-radius: 50%;
+    border-style: none;
+    font-size: 18px;
+    width: 55px;
+    height: 55px;
+    margin: 2px;
+}
+
+.btn.special{
+    color: black;
+    background-color: rgb(120, 120, 120);
+}
+
+.btn.special:hover{
+    color: white;
+    background-color: rgb(170, 170, 170);
+}
+
+.btn.operator{
+    background-color: rgb(252, 141, 12);
+}
+
+.btn.operator:hover{
+    background-color: rgb(255, 191, 62);
+}
+
+.btn.number, .btn.decimal{
+    font-size: 1.25rem;
+    background-color: rgb(38, 38, 38);
+}
+
+.btn.decimal{
+    font-size: 2rem;
+    padding-bottom: .5rem;
+}
+
+.btn.number:hover, .btn.decimal:hover{
+    background-color: rgb(88, 88, 88);
+}
+
+#zero{
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    width: 118px;
+}
+
+#zero p{
+    padding-left: 18px;
+    text-align: left;   
+}
