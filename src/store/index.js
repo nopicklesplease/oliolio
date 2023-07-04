@@ -6,13 +6,15 @@ import btc from './btc';
 import wallets from './wallets';
 import entries from './entries';
 import users from './users';
+import hidden from './hidden';
 
 const reducer = combineReducers({
   auth,
   btc,
   wallets,
   entries,
-  users
+  users,
+  hidden
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -24,3 +26,4 @@ export * from './btc';
 export * from './wallets';
 export * from './entries';
 export * from './users';
+export * from './hidden';

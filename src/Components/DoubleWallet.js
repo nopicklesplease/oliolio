@@ -232,9 +232,11 @@ const DoubleWallet = () => {
                                             </div>
                                         </div>
 
-                                        <div id="entry-date-container" onClick={() => entryNavigate(entry.id)}>
-                                                <i className="fa-solid fa-magnifying-glass fa-xs"></i> 
+                                    <span className='entryLink' onClick={() => entryNavigate(entry.id)}>
+
+                                        <div id="entry-date-container">
                                                 <div id='entry-date-inner-container'>
+                                                <i className="fa-solid fa-magnifying-glass fa-xs"></i> 
                                                     <div className='entry-li' id='entry-date'>
                                                         { entry.createdAt.slice(0, 10) } 
                                                     </div>
@@ -297,6 +299,7 @@ const DoubleWallet = () => {
                                                 </div>
                                             </div>
                                         }
+                                    </span>
                                     </div>
                                 </li>
                             )
