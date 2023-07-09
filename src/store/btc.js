@@ -14,4 +14,5 @@ export const fetchBtc = () => {
     }
 }
 
+
 export default btc;
