@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
@@ -14,9 +14,21 @@ const Header = () => {
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const [editHiddenToggle, setHiddenToggle] = useState(true);
     const [hamburgerOpen, setHamburgerOpen] = useState(false)
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+      }, [width]);
 
     console.log('this is so hidden', hidden);
 
@@ -50,6 +62,19 @@ const Header = () => {
 
     document.addEventListener('mousedown', closeMainMenu)
 
+    const hamburgerSizeSwitch = () => {
+        switch(true) {
+            case (width > 1024):
+                return 30;
+            case (width > 500):
+                return 25;
+            case (width > 300):
+                return 20;
+            default:
+                return 12;
+        }
+    }
+
     return(
         <div id='header-container'>
             <div id='header-title-outer-container'>
@@ -72,7 +97,7 @@ const Header = () => {
                 <div id='header-dropdown'>
                     <div ref={ mainMenu } className={ `dropdown ${ dropdownVisible ? 'visible' : '' }` }>
                         <div onClick={handleDropdownToggle}>
-                        <Hamburger toggled={ hamburgerOpen } toggle={setHamburgerOpen} />
+                            <Hamburger toggled={ hamburgerOpen } size={hamburgerSizeSwitch()} toggle={setHamburgerOpen} />
                         </div>
 
                         <div className='dropdown-content'>
@@ -84,7 +109,7 @@ const Header = () => {
                                 Profile
                             </Link>
 
-                            <li key={ 'logout' } onMouseDown={ _logout }>Logout</li> 
+                            <li className='logout-link' key={ 'logout' } onMouseDown={ _logout }>Logout</li> 
                         </div>
                         {/* { auth.username.slice(0,1).toUpperCase() + '.' } */}
                         {/* <img id='profile-thumb' src={ auth.imageUrl } /> */}

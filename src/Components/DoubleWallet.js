@@ -14,6 +14,17 @@ const DoubleWallet = () => {
     const [price, setPrice] = useState('');
     const [editNameToggle, setEditNameToggle] = useState(true);
     const [editEntryToggle, setEditEntryToggle] = useState(true);
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+      }, [width]);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -139,6 +150,10 @@ const DoubleWallet = () => {
         return null;
     }
 
+    if(!wallets) {
+        return null;
+    }
+
     return(
         <div id='detail-container'>
             <div id='wallet-detail-title'>
@@ -158,17 +173,24 @@ const DoubleWallet = () => {
                     </span> 
                 }
             </div>
-            <div id='wallet-marquee'>
-                <MarqueeStats />
-            </div>
-                <CreateEntry />
+
+            {width > 1024 && (
+                <div id='wallet-marquee'>
+                    <MarqueeStats />
+                </div>
+            )}
+
+            {width > 1024 && <CreateEntry />}
+                
             <div id='wallet-line-items'>
 
                 <div className='entry-line-title'>
+                    <div className='small-type-date-title'>
+
                     <div id='entry-title-del'>
                         DEL
                     </div>
-                    <div id='entry-title-type' style={{ marginLeft: '.5rem' }}>
+                    <div id='entry-title-type'>
                         TYPE
                     </div>
 
@@ -179,6 +201,8 @@ const DoubleWallet = () => {
                         <div id='entry-title-time'>
                             TIME
                         </div>
+                    </div>
+
                     </div>
 
                     <div id='entry-title-btcusd-container' style={{ marginLeft: '-.5rem' }}>
@@ -214,9 +238,13 @@ const DoubleWallet = () => {
                         { entries.filter(entry => entry.walletId === id).map(entry => {
                             return(
                                 <li className='list-items' key={ entry.id }>
+
                                     <div className="entry-line">
-                                        <div style={{ fontSize: '1.25rem' }} id='entry-delete-container' onClick={ ev => _destroyEntry(entry) }>
-                                            <i style={{ marginLeft: '1rem' }} className="fa-regular fa-trash-can"></i> 
+
+                                    <div className='small-type-date'>
+
+                                        <div id='entry-delete-container' onClick={ ev => _destroyEntry(entry) }>
+                                            <span className='trash-can-only'><i className="fa-regular fa-trash-can"></i></span>
                                         </div>
 
                                         <div id='entry-type-container'>
@@ -232,11 +260,13 @@ const DoubleWallet = () => {
                                             </div>
                                         </div>
 
-                                    <span className='entryLink' onClick={() => entryNavigate(entry.id)}>
+                                    
 
                                         <div id="entry-date-container">
                                                 <div id='entry-date-inner-container'>
-                                                <i className="fa-solid fa-magnifying-glass fa-xs"></i> 
+                                                <div className='magnifying-glass-only'>    
+                                                <i className="fa-solid fa-magnifying-glass fa-xs"></i>
+                                                </div> 
                                                     <div className='entry-li' id='entry-date'>
                                                         { entry.createdAt.slice(0, 10) } 
                                                     </div>
@@ -245,6 +275,11 @@ const DoubleWallet = () => {
                                                     </div>
                                                 </div>
                                         </div>
+
+                                    </div>
+
+                                        <span className='entryLink' onClick={() => entryNavigate(entry.id)}>
+
 
                                         { entry.soldBtc === null ? 
                                             <div id="entry-btc-container">

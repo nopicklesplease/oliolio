@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
@@ -15,6 +15,17 @@ const Ticker = () => {
 
     const { auth, wallets } = useSelector (state => state)
     const { hash } = useLocation();
+    const [width, setWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+      }, [width]);
 
     console.log('this is the hash', hash)
 
@@ -26,6 +37,7 @@ const Ticker = () => {
 
     return(
         <div id='content-body'>
+
             <div id='left-side-outer-container'>
 
                 <div id='left-side-inner-container'>
@@ -37,9 +49,9 @@ const Ticker = () => {
                 </div>
 
                 <WalletContainer />
-                { hash.includes('wallets') && <WalletStats /> }
-
+                { (hash.includes('wallets') && (width > 1024) ) && <WalletStats /> }
             </div>
+
             <div className="outer-list-container">
                 <div className="inner-list-container">
 
@@ -54,7 +66,8 @@ const Ticker = () => {
                     :
                         <>
                             { hash === '#/createwallet' && <CreateWalletDetail /> }
-                            { hash.includes('user') && <ProfileDetail /> }           
+                            { hash.includes('user') && <ProfileDetail /> }
+                            { hash === '' && <CreateWalletDetail /> }
                         </>
                     }
                 </div>

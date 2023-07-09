@@ -2,8 +2,16 @@ body {
   font-family: 'League Spartan';
   background-color: #fbfbfb;
   /* margin: 1rem; */
-  margin: 0;
   color: #2a603f;
+}
+
+:root{
+  --lightblue: #33bbce;
+  --beige: #fff6d8;
+  --silver: #e4f1f0;
+  --deepred: #ff3434;
+  --pink: #f4cee2;
+  --gold: #ffd04e;
 }
 
 li{
@@ -32,8 +40,7 @@ input:focus{
 #left-side-outer-container{
   flex: 1;
   margin-bottom: 1.5rem;
-  position: -webkit-sticky;
-  position: sticky;
+  padding-top: .5rem;
   /* border: 1px solid red; */
 }
 
@@ -52,10 +59,11 @@ input:focus{
   display: flex;
   align-items: center;
   padding: .5rem;
+
 }
 
 #wallet-dropdown-title{
-  flex: 1;
+  /* flex: 1; */
   font-size: 4rem;
   margin-right: .75rem;
 }
@@ -81,7 +89,7 @@ input:focus{
   font-size: 1.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-top: 2.5rem;
+  margin-top: 1.25rem;
   /* margin-bottom: 1rem; */
 }
 
@@ -126,7 +134,7 @@ input:focus{
   margin-bottom: 1rem;
   background-color: #ffd04e;
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
 }
 
 #entry-txid-text{
@@ -142,6 +150,8 @@ input:focus{
   -moz-animation: entry-txid 30s linear infinite;
   -webkit-animation: entry-txid 30s linear infinite;
   animation: entry-txid 30s linear infinite;
+  z-index: auto;
+  position:relative
 }
 
 
@@ -176,7 +186,7 @@ input:focus{
 }
 
 #wallet-dropdown{
-  flex: 2;
+  /* flex: 2; */
 }
 
 #wallet-dropdown select{
@@ -257,39 +267,62 @@ input:focus{
   display: none;
   position: absolute;
   background-color: black;
-  min-width: 160px;
+  min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
   margin-left: 10px;
-  z-index: 1;
+  z-index: 6;
   border-radius: 5px;
-  margin-top: .75rem;
+  margin-top: .25rem;
+  border: 2px solid var(--lightblue);
+  /* margin-left: -7.75rem; */
 }
 
 .dropdown.visible .dropdown-content {
   display: block;
 }
 
-.dropdown-content a {
+.dropdown-content a, .logout-link {
   display: block;
   background-color: #fff6d8;
-  color: #33bbce;
+  color: var(--lightblue);
   padding: 12px 16px;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .dropdown-content a:hover{
-  background-color: black;
+  background-color: var(--lightblue);
+  color: white;
   cursor: pointer;
 }
 
+.dropdown-content a:active{
+  background-color: orange;
+}
+
 .dropdown-content a:first-child{
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 
 .dropdown-content a:last-child{
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.logout-link{
+  cursor: pointer;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.logout-link:hover{
+  background-color: var(--lightblue);
+  color: white;
+}
+
+.logout-link:active{
+  background-color: orange;
+  color: white;
 }
 
 #hidden-outer-container{
@@ -321,10 +354,6 @@ input:focus{
   background-color: #f4cee2;
   border-radius: 5px;
   font-size: 3rem;
-}
-
-#header-user a{
-  color: #ff3434;
 }
 
 #profile-thumb{
@@ -382,22 +411,20 @@ input:focus{
 }
 
 #btc-logo{
-  width: 150px;
+  max-width: 90%;
 }
 
 #logo-container{
   display: flex;
   align-items: center;
   padding-bottom: .35rem;
-  /* border: 1px solid blue; */
 }
 
 #logo-img-container{
   display: flex;
   justify-content: center;
   width: 30%;
-  margin-left: .5rem;
-  /* border: 1px solid black; */
+  /* margin-left: .5rem; */
 }
 
 #logo-price-container{
@@ -405,11 +432,12 @@ input:focus{
   align-items: flex-end;
   flex-direction: column;
   width: 70%;
-  font-size: 5.7rem;
+  font-size: 5.3rem;
   margin-left: 1.25rem;
-  margin-right: .5rem;
+  /* margin-right: .5rem; */
+  padding-top: .5rem;
+  padding-bottom: .5rem;
   padding-right: .5rem;
-  /* border: 1px solid black; */
 }
 
 #logo-current-price{
@@ -448,7 +476,9 @@ input:focus{
   flex: 1;
   height: auto;
   margin-left: 1rem;
-  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  /* z-index: auto;
+  display: relative; */
 }
 
 .inner-list-container{
@@ -700,25 +730,34 @@ input:focus{
   font-size: 1.5rem;
 }
 
-/* .list-items{
-  border: 1px solid blue;
-} */
+.list-items{
+  display: flex;
+  align-items: center;
+  padding-bottom: .75rem;
+  padding-top: .75rem;
+  border-bottom: 1px dashed black;
+}
+
+.list-items:last-child{
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
 
 .entryLink{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   cursor: pointer;
-  padding-right: .5rem;
 }
 
 .entry-line{
   /* display: inline; */
   display: flex;
   align-items: center;
-  padding-bottom: .75rem;
+  /* padding-bottom: .75rem;
   padding-top: .75rem;
-  border-bottom: 1px dashed black;
+  border-bottom: 1px dashed black; */
 }
 
 .entry-line a{
@@ -736,6 +775,7 @@ input:focus{
   padding-top: .5rem;
   border-bottom: 2px solid #535353;
   display: flex;
+  justify-content: space-between;
 }
 
 #entry-delete-container{
@@ -745,6 +785,11 @@ input:focus{
   padding-bottom: .25rem;
   flex: .25;
   cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.trash-can-only{
+  margin-left: .25rem;
 }
 
 #entry-title-del{
@@ -770,6 +815,7 @@ input:focus{
   align-items: flex-end;
   flex: .45;
   font-weight: 700;
+  margin-left: .5rem;
 }
 
 #entry-title-edit{
@@ -803,13 +849,17 @@ input:focus{
 #entry-date-container{
   display: flex;
   align-items: flex-end;
-
   flex: 1;
 }
 
 #entry-volume, #entry-price, #entry-btc, #entry-usd-value, #entry-usd-diff, #entry-soldBtc, #entry-diff-perc{
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
+}
+
+#entry-price{
+  align-items: flex-start;
 }
 
 #entry-date{
@@ -920,4 +970,316 @@ input:focus{
 
 #vpn-warning a:hover{
   color: orange;
+}
+
+
+
+/* RE-SIZING */
+
+@media screen and (max-width: 1350px) {
+
+  #logo-price-container{
+    font-size: 5rem;
+  }
+
+  #header-title-outer-container{
+    flex: 2.5;
+  }
+  
+}
+
+@media screen and (max-width: 1250px) {
+
+  #logo-price-container{
+    font-size: 4.5rem;
+  }
+  
+}
+
+@media screen and (max-width: 1170px) {
+
+  #logo-price-container{
+    font-size: 4rem;
+  }
+
+  #header-title-outer-container{
+    flex: 2;
+  }
+
+  #header-title{
+    font-size: 3.5rem;
+  }
+
+}
+
+@media screen and (max-width: 1080px) {
+
+  #logo-price-container{
+    font-size: 3.75rem;
+  }
+    
+  }
+
+@media screen and (max-width: 1024px) {
+
+  #content-body{
+    flex-direction: column;
+  }
+
+  #header-title-outer-container{
+    flex: 5;
+  }
+
+  #header-title{
+    font-size: 5rem;
+  }
+
+  #logo-img-container{
+    width: 25%;
+  }
+
+  #logo-price-container{
+    font-size: 8rem;
+    width: 90%;
+  }
+
+  .dropdown-content{
+    margin-left: -5.25rem;
+    justify-content: flex-end;
+  }
+    
+}
+
+
+@media screen and (max-width: 415px) {
+
+  #content-body{
+    flex-direction: column;
+  }
+
+  #header-title-outer-container{
+    flex: 2;
+  }
+
+  #header-title{
+    font-size: 2.25rem;
+  }
+
+  #header-user{
+    font-size: .5rem;
+  }
+
+  #hidden{
+    font-size: 1.25rem;
+  }
+
+  #logo-img-container{
+    width: 35%;
+    padding-left: .25rem;
+    padding-right: .25rem;
+  }
+
+  #logo-price-container{
+    font-size: 2.5rem;
+    margin-left: 0;
+    width: 90%;
+  }
+
+  .dropdown-content{
+    margin-left: -5.25rem;
+    justify-content: flex-end;
+  }
+
+  #logo-current-price{
+    margin-top: -.25rem;
+    font-size: .75rem;
+  }
+
+  #left-side-lower-body{
+    padding: .5rem;
+    padding-top: .75rem;
+  }
+
+  #wallet-dropdown-title{
+    flex: 1;
+    font-size: 1.25rem;
+    margin-right: .75rem;
+  }
+
+  #wallet-dropdown select{
+    width: 100%;
+    height: 80%;
+  }
+  
+  .wallet-dropdown-object{
+    font-size: 1rem;
+  }
+
+  .outer-list-container{
+    flex: 1;
+    height: auto;
+    margin-left: 0;
+    margin-bottom: 5rem;
+    margin-top: -.35rem;
+  }
+  
+  .inner-list-container{
+    margin-right: .2rem;
+    box-shadow: 4px 4px #95d3dc;
+  }
+
+  #wallet-detail-title{
+    font-size: 1.25rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    margin-bottom: .75rem;
+  }
+
+  #delete-wallet-title{
+    font-size: 1rem;
+  }
+
+  #wallet-line-items{
+    font-size: .75rem;
+  }
+
+  #entry-title-del{
+    display: none;
+    flex: .3;
+  }
+
+  #entry-title-date{
+    font-weight: 400;
+    font-size: .65rem;
+  }
+
+  #entry-delete-container{
+    display: none;
+  }
+
+  #entry-title-type{
+    justify-content: flex-start;
+    margin-left: 0;
+    flex: .45;
+  }
+
+  #entry-title-datetime-container{
+    flex: .75
+  }
+
+  #entry-title-btcusd-container{
+    flex: 1.35;
+  }
+
+  #entry-title-valuecostbasis-container{
+    flex: 1;
+  }
+
+  #entry-title-totals-container{
+    flex: 1.1;
+    margin-right: 0;
+  }
+  
+  #entry-title-time, #entry-title-price, #entry-title-costbasis, #entry-title-totalperc{
+    font-size: .65rem;
+  }
+
+  .entry-line-title{
+    padding-right: 0;
+    padding-bottom: .75rem;
+    margin-bottom: .5rem;
+    /* display: flex;
+    justify-content: space-between; */
+  }
+
+  .trash-can-only{
+    margin-left: .5rem;
+    font-size: .9rem;
+  }
+
+  #entry-title-time{
+    display: none;
+  }
+
+  #entry-time{
+    display: none;
+  }
+
+  #entry-date{
+    font-weight: 500;
+  }
+
+  #entry-type-container{
+    padding: 0;
+  }
+
+  #entry-type{
+    flex: .45;
+    /* margin-left: .5rem; */
+    font-size: .7rem;
+    margin-bottom: .15rem;
+  }
+
+  #entry-btc{
+    margin-bottom: .15rem;
+  }
+
+  #entry-usd-value{
+    margin-bottom: .15rem;
+  }
+
+  #entry-usd-diff{
+    margin-bottom: .15rem;
+  }
+
+  .list-items{
+    font-size: .6rem;
+  }
+
+  .entry-li{
+    margin-left: 0;
+  }
+
+  #entry-date-container{
+    justify-self: flex-start;
+    padding: 0;
+  }
+  
+
+  #entry-type-container{
+    flex: .45;
+    margin-left: 0;
+    font-size: .6rem;
+  }
+
+  #entry-time, #entry-price, #entry-volume, #entry-diff-perc{
+    font-size: .6rem;
+  }
+
+  .small-type-date-title{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .small-type-date{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  #entry-btc-container{
+    flex: 1.25;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .entry-line{
+    width: 100%;
+  }
+
+  .magnifying-glass-only{
+    display: none;
+  }
+    
 }
