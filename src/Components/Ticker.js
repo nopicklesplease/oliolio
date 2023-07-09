@@ -47,6 +47,7 @@ const Ticker = () => {
                 <div id='left-side-lower-body'>
                     <Logo />
                 </div>
+                
 
                 <WalletContainer />
                 { (hash.includes('wallets') && (width > 1024) ) && <WalletStats /> }
