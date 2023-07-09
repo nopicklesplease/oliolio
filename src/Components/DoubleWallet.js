@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { destroyWallet, destroyEntry, updateWallet } from '../store';
@@ -6,20 +6,11 @@ import CreateEntry from './CreateEntry';
 import MarqueeStats from './MarqueeStats';
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-
-const customTypography = createTheme({
-    typography: {
-        fontFamily: 'League Spartan',
-    },
-})
+import { styled } from '@mui/material/styles';
 
 const TextFieldStyled = styled(TextField)({
     "& .MuiInput-underline:after":{
-        borderBottomColor: '#33bbce'
-    },
-    "& textarea": {
-        fontFamily: 'monospace'
+        borderBottomColor: 'orange'
     }
 })
 
@@ -42,10 +33,9 @@ const DoubleWallet = () => {
     const [name, setName] = useState('');
     const [volume, setVolume] = useState ('');
     const [price, setPrice] = useState('');
-    const [editNameToggle, setEditNameToggle] = useState(true);
-    const [editEntryToggle, setEditEntryToggle] = useState(true);
     const [width, setWidth] = useState(window.innerWidth);
     const [isPopupVisible, setPopupVisible] = useState(false);
+    const [popupTitle, setPopupTitle] = useState('');
 
     useEffect(() => {
         const handleResize = () => {
@@ -72,25 +62,15 @@ const DoubleWallet = () => {
         setName(_wallet.name);
     }, [_wallet])
 
-    const toggleNameInput = () => {
-        setEditNameToggle(false);
-    }
-
-    const toggleEntryInput = () => {
-        setEditEntryToggle(false);
-    }
-
     const updateName = async(ev) => {
         ev.preventDefault();
         await dispatch(updateWallet({ id, name }));
-        setEditNameToggle(true);
         setPopupVisible(false);
     }
 
     const updateEntry = async(ev) => {
         ev.preventDefault();
         await dispatch(updateEntry({ id, volume, price }));
-        setEditEntryToggle(true);
     }
 
     const _destroyWallet = (wallet) => {
@@ -178,14 +158,24 @@ const DoubleWallet = () => {
         navigate(`#/api/entries/${ entry }`);
     }
 
-    const editCheck = () => {
+    const editCheck = (title) => {
         setPopupVisible(true);
-        console.log('we checked')
+        setPopupTitle(title);
     }
 
     const editCheckClose = () => {
         setPopupVisible(false);
     }
+
+    const popupWindow = useRef(null);
+
+    const closePopupWindow = (e) => {
+        if(popupWindow.current && !popupWindow.current.contains(e.target)){
+            setPopupVisible(false);
+        }
+    }
+
+    document.addEventListener('mousedown', closePopupWindow)
 
     if(!_wallet) {
         return null;
@@ -198,21 +188,14 @@ const DoubleWallet = () => {
     return(
         <div id='detail-container'>
             <div id='wallet-detail-title'>
-                { editNameToggle ? 
-                    <span id='wallet-name'> 
-                        { _wallet.name } 
-                        <span style={{ marginLeft: '.5em' }} className='edit-button' onClick={ () => editCheck() }>
-                            <i style={{ cursor: 'pointer' }} className="fa-regular fa-pen-to-square fa-2xs"></i>
-                        </span>
-                    </span> 
-                : 
-                    <span>
-                        <input id='input-wallet-name' value={ name } onChange={ ev => setName(ev.target.value) } />
-                        <span className='save-button' onClick={ updateName }>
-                            <i className="fa-regular fa-floppy-disk fa-2xs"></i>
-                        </span>
-                    </span> 
-                }
+                
+                <span id='wallet-name'> 
+                    { _wallet.name } 
+                    <span style={{ marginLeft: '.5em' }} className='edit-button' onClick={ () => editCheck('Edit Wallet Name') }>
+                        <i style={{ cursor: 'pointer' }} className="fa-regular fa-pen-to-square fa-2xs"></i>
+                    </span>
+                </span> 
+                
             </div>
 
             {width > 1024 && (
@@ -222,7 +205,7 @@ const DoubleWallet = () => {
             )}
 
             {width < 1024 && (
-                <div className='create-new-entry'>
+                <div className='create-new-entry' onClick={ () => editCheck('Create New Entry') }>
                     CREATE NEW ENTRY
                 </div>
             )}
@@ -390,7 +373,8 @@ const DoubleWallet = () => {
                 </ol>
 
             </div>
-            <div id='delete-wallet-title' onClick={ ev => _destroyWallet(_wallet) }> 
+
+            <div id='delete-wallet-title' onClick={ () => editCheck('Delete Wallet') }> 
                 <span>
                     Delete { _wallet.name }
                 </span>
@@ -398,47 +382,98 @@ const DoubleWallet = () => {
 
             { isPopupVisible && (
                 <div className='modalBackground'>
-                    <div className='modal-title'>
-                        Edit Wallet Name
+                    <div className='modal-title' id={ `${ popupTitle.includes('Delete') ? 'modal-title-delete' : '' }` }>
+                        { popupTitle }
                     </div>
-                    <div className="modalContainer">
-                        <TextFieldStyled 
-                            sx={{
-                                borderBottomColor: '#33bbce'
-                            }}
-                            fullWidth 
-                            autoFocus
-                            variant='standard' 
-                            value={ name } 
-                            onChange={ ev => setName(ev.target.value) } 
-                        />
 
-                        <div>
-
-                            <SaveButtonStyled
+                    {popupTitle.includes('Edit') && (
+                        <div ref={ popupWindow } className="modalContainer">
+                            <TextFieldStyled 
                                 sx={{
-                                    backgroundColor: '#33bbce',
+                                    borderBottomColor: '#33bbce'
                                 }}
-                                type='submit'
-                                variant='contained' 
-                                onClick={ updateName }
-                                disabled={ !name > 0 ? true : false }
-                            >
-                                Save
-                            </SaveButtonStyled>
+                                fullWidth 
+                                autoFocus
+                                variant='standard' 
+                                value={ name } 
+                                onChange={ ev => setName(ev.target.value) } 
+                            />
+
+                            <div className='popup-buttons'>
+
+                                <SaveButtonStyled
+                                    sx={{
+                                        backgroundColor: '#33bbce',
+                                    }}
+                                    type='submit'
+                                    variant='contained' 
+                                    onClick={ updateName }
+                                    disabled={ !name > 0 ? true : false }
+                                >
+                                    Save
+                                </SaveButtonStyled>
 
                                 <CloseButtonStyled 
                                     sx={{
                                         backgroundColor: '#c9c9c9',
-                                        color: 'white'
+                                        color: 'white',
+                                        marginLeft: '.5rem'
                                     }}
                                     variant='contained' 
                                     onClick={editCheckClose}
                                 >
-                                    Close
+                                    Cancel
                                 </CloseButtonStyled>
+
                             </div>
                         </div>
+                    )}
+
+                    {popupTitle.includes('Delete') && (
+                        <div ref={ popupWindow } className="modalContainer">
+                            
+                            <p>Are you sure you want to delete <span style={{fontWeight: 700}}>{_wallet.name}</span>?</p>
+                            
+                            <p>This operation cannot be undone.</p>
+
+                            <div className='popup-buttons'>
+
+                                <SaveButtonStyled
+                                    sx={{
+                                        backgroundColor: '#ff3434',
+                                    }}
+                                    type='submit'
+                                    variant='contained' 
+                                    onClick={ () => _destroyWallet(_wallet) }
+                                    disabled={ !name > 0 ? true : false }
+                                >
+                                    Confirm
+                                </SaveButtonStyled>
+
+                                <CloseButtonStyled 
+                                    sx={{
+                                        backgroundColor: '#c9c9c9',
+                                        color: 'white',
+                                        marginLeft: '.5rem'
+                                    }}
+                                    variant='contained' 
+                                    onClick={editCheckClose}
+                                >
+                                    Cancel
+                                </CloseButtonStyled>
+
+                            </div>
+
+                        </div>
+                    )}
+
+                    {popupTitle.includes('Create') && (
+                        <div className="modalContainer">
+                            
+                            <CreateEntry editCheckClose={ editCheckClose }/>
+
+                        </div>
+                    )}
                 </div>
             )}
         </div>

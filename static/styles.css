@@ -500,7 +500,7 @@ input:focus{
   padding: 1rem;
   padding-top: 1.5rem;
   /* height: 100%; */
-  background-color: #9ae8bd;
+  background-color: #bcf0d3;
   font-size: 3rem;
   border-radius: 5px;
   box-shadow: 4px 4px var(--blueShadow);
@@ -535,7 +535,7 @@ input:focus{
   margin-right: .5rem;
   height: auto;
   background-color: white;
-  border: 1px solid #747474;
+  border: 1px solid #cccccc;
   border-radius: 5px;
   /* padding-left: 2em;
   padding-right: 2em; */
@@ -756,9 +756,13 @@ input:focus{
 
 #create-wallet-detail{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
-  margin-top: 1.5rem;
+  padding: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 #create-button{
@@ -769,6 +773,7 @@ input:focus{
   padding: 1rem;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .create-new-entry{
@@ -1051,7 +1056,8 @@ input:focus{
   width: 80%;
   max-width: 600px;
   background: var(--beige);
-  padding: 30px;
+  padding: 2rem;
+  padding-top: 1.5rem;
   box-sizing: border-box;
   color: var(--darkGreen);
   border-radius: 15px;
@@ -1067,11 +1073,32 @@ input:focus{
   /* text-shadow: 1px 1px 1px rgb(5, 5, 5); */
 }
 
-.edit-textField{
-  color: var(--darkGreen) !important;
-  border-bottom: 1px solid black !important;
+.modal-title{
+  width: 80%;
+  margin-left: 1.25rem;
+  margin-bottom: .5rem;
+  font-size: 6vw;
+  color: var(--lightblue);
+  /* text-shadow: 1px 1px 1px rgb(5, 5, 5); */
 }
 
+#modal-title-delete{
+  color: var(--deepred);
+}
+
+.popup-buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.create-wallet-button{
+  margin-top: 1.5rem;
+}
+
+.entry-textFields{
+  margin-top: 1.5rem;
+}
 
 /* RE-SIZING */
 
@@ -1089,9 +1116,9 @@ input:focus{
 
 @media screen and (max-width: 1250px) {
 
-  #logo-price-container{
+  /* #logo-price-container{
     font-size: 4.5rem;
-  }
+  } */
   
 }
 
@@ -1179,7 +1206,7 @@ input:focus{
   }
 
   #logo-price-container{
-    font-size: 11.5vw;
+    font-size: 11vw;
     margin-left: 0;
     width: 90%;
   }
@@ -1215,7 +1242,7 @@ input:focus{
   }
 
   .outer-list-container{
-    flex: 1;
+    flex: 10;
     height: auto;
     margin-left: 0;
     margin-bottom: 5rem;
@@ -1248,7 +1275,7 @@ input:focus{
 
   #entry-title-date{
     font-weight: 400;
-    font-size: 3vw;
+    font-size: 2.5vw;
   }
 
   #entry-delete-container{

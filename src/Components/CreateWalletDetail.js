@@ -2,6 +2,27 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { createWallet, fetchWallets } from '../store';
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+
+
+const TextFieldStyled = styled(TextField)({
+    "& .MuiInput-underline:after":{
+        borderBottomColor: 'orange'
+    },
+
+    '& label.Mui-focused': {
+        color: 'black',
+      },
+
+});
+
+const SaveButtonStyled = styled(Button)({
+    '&:hover': {
+        backgroundColor: 'orange',
+    },
+})
 
 const CreateWallet = () => {
 
@@ -24,15 +45,32 @@ const CreateWallet = () => {
                 Create Wallet
             </div>
             <div id='create-wallet-detail'>
-                <form onSubmit={ create }>
-                    Wallet Name: 
-                    <input value={ name } onChange={ ev => setName(ev.target.value) } required />
 
-                    <button id='create-button'>
-                        Create
-                    </button>
+                <TextFieldStyled 
+                    sx={{
+                        borderColor: '#33bbce'
+                    }}
 
-                </form>
+                    fullWidth 
+                    autoFocus
+                    variant='standard'
+                    placeholder='Wallet Name' 
+                    onChange={ ev => setName(ev.target.value) }
+                />
+
+                <div className='create-wallet-button'>
+                    <SaveButtonStyled
+                        sx={{
+                            backgroundColor: '#33bbce',
+                        }}
+                        type='submit'
+                        variant='contained' 
+                        onClick={ create }
+                        disabled={ !name > 0 ? true : false }
+                    >
+                        Create Wallet
+                    </SaveButtonStyled>
+                </div>
             </div>
         </div>
     );
