@@ -49,7 +49,7 @@ const Ticker = () => {
                 </div>
                 
 
-                <WalletContainer />
+                {/* <WalletContainer /> */}
                 { (hash.includes('wallets') && (width > 1024) ) && <WalletStats /> }
             </div>
 

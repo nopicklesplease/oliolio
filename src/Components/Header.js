@@ -6,19 +6,17 @@ import { Divide as Hamburger } from 'hamburger-react'
 import { setHidden } from '../store';
 
 const Header = () => {
-    const { auth, hidden } = useSelector(state => state);
-
-    useEffect(() => {
-        dispatch(setHidden);
-    }, [hidden])
+    const { auth, wallets } = useSelector(state => state);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [editHiddenToggle, setHiddenToggle] = useState(true);
     const [hamburgerOpen, setHamburgerOpen] = useState(false)
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [walletDropdownVisible, setWalletDropdownVisible] = useState(false);
     const [width, setWidth] = useState(window.innerWidth);
+
+    const userWallets = wallets.filter(wallet => wallet.userId === auth.id)
 
     useEffect(() => {
         const handleResize = () => {
@@ -29,13 +27,6 @@ const Header = () => {
             window.removeEventListener('resize', handleResize);
         };
       }, [width]);
-
-    console.log('this is so hidden', hidden);
-
-    const toggleHidden = () => {
-        dispatch(setHidden());
-        return editHiddenToggle === false ? setHiddenToggle(true) : setHiddenToggle(false);
-    }
 
     const profileNavigate = () => {
         navigate(`#/user/${ auth.id }`)
@@ -49,9 +40,22 @@ const Header = () => {
     const handleDropdownToggle = () => {
         setDropdownVisible(!dropdownVisible);
         setHamburgerOpen(!hamburgerOpen);
-      };
+    };
+
+    const walletDropdownToggle = () => {
+        setWalletDropdownVisible(!walletDropdownVisible);
+    };
+
+    const walletDropdownNavigate = (inp) => {
+        if(inp == null){
+            navigate('#/createwallet')
+        } else {
+            navigate(`#/api/wallets/${ inp }`);
+        }
+    }
 
     const mainMenu = useRef(null);
+    const walletMenu = useRef(null);
 
     const closeMainMenu = (e) => {
         if(mainMenu.current && hamburgerOpen && !mainMenu.current.contains(e.target)){
@@ -60,7 +64,14 @@ const Header = () => {
         }
     }
 
+    const closeWalletMenu = (e) => {
+        if(walletMenu.current && !walletMenu.current.contains(e.target)){
+            setWalletDropdownVisible(false);
+        }
+    }
+
     document.addEventListener('mousedown', closeMainMenu)
+    document.addEventListener('mousedown', closeWalletMenu)
 
     const hamburgerSizeSwitch = () => {
         switch(true) {
@@ -85,14 +96,34 @@ const Header = () => {
                 </div>
             </div>
             <div id='hidden-outer-container'>
-                <div id='hidden' onClick={ toggleHidden }>
-                    { editHiddenToggle ? 
-                        <i className="fa-regular fa-eye-slash"></i>
-                    : 
-                        <i className="fa-regular fa-eye"></i> 
-                    }
+                <div id='hidden' onClick={ walletDropdownToggle }>
+
+                <div id='wallet-dropdown'>
+                    <div ref={ walletMenu } className={ `wallet-dropdown ${ walletDropdownVisible ? 'visible' : '' }` }>
+                        <div onClick={ walletDropdownToggle }>
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+
+                        <div className='wallet-dropdown-content'>
+                            <ol>
+                                {userWallets.map(wallet => {
+                                    return(
+                                        <li className='wallet-dropdown-li' key={ wallet.id } onClick={ () => walletDropdownNavigate(wallet.id) }>
+                                            { wallet.name }
+                                        </li>
+                                    )
+                                })}
+                                <li className='wallet-dropdown-li' id='wallet-dropdown-create' onClick={ () => walletDropdownNavigate() }>
+                                    Create New Wallet
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
                 </div>
             </div>
+            
             <div id='header-user'>
                 <div id='header-dropdown'>
                     <div ref={ mainMenu } className={ `dropdown ${ dropdownVisible ? 'visible' : '' }` }>

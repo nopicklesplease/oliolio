@@ -4,6 +4,36 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { destroyWallet, destroyEntry, updateWallet } from '../store';
 import CreateEntry from './CreateEntry';
 import MarqueeStats from './MarqueeStats';
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+
+const customTypography = createTheme({
+    typography: {
+        fontFamily: 'League Spartan',
+    },
+})
+
+const TextFieldStyled = styled(TextField)({
+    "& .MuiInput-underline:after":{
+        borderBottomColor: '#33bbce'
+    },
+    "& textarea": {
+        fontFamily: 'monospace'
+    }
+})
+
+const SaveButtonStyled = styled(Button)({
+    '&:hover': {
+        backgroundColor: 'orange',
+    },
+})
+
+const CloseButtonStyled = styled(Button)({
+    '&:hover': {
+        backgroundColor: '#c9c9c9',
+    },
+})
 
 const DoubleWallet = () => {
 
@@ -15,6 +45,7 @@ const DoubleWallet = () => {
     const [editNameToggle, setEditNameToggle] = useState(true);
     const [editEntryToggle, setEditEntryToggle] = useState(true);
     const [width, setWidth] = useState(window.innerWidth);
+    const [isPopupVisible, setPopupVisible] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
@@ -35,6 +66,12 @@ const DoubleWallet = () => {
     const _wallet = wallets.find(wallet => wallet.id === id);
     const _entries = entries.filter(entry => entry.walletId === _wallet.id)
 
+    console.log('wallet name', _wallet.name)
+
+    useEffect(() => {
+        setName(_wallet.name);
+    }, [_wallet])
+
     const toggleNameInput = () => {
         setEditNameToggle(false);
     }
@@ -47,6 +84,7 @@ const DoubleWallet = () => {
         ev.preventDefault();
         await dispatch(updateWallet({ id, name }));
         setEditNameToggle(true);
+        setPopupVisible(false);
     }
 
     const updateEntry = async(ev) => {
@@ -71,12 +109,6 @@ const DoubleWallet = () => {
     const _destroyEntry = (entry) => {
         dispatch(destroyEntry(entry));
     }
-
-    useEffect(() => {
-        if(_wallet){
-            setName(_wallet.name);
-        }
-    }, [wallets])
 
     const btcSubtotal = _entries.map(entry => entry.btc).reduce((acc, val) => {
         acc += (val * 1);
@@ -146,6 +178,15 @@ const DoubleWallet = () => {
         navigate(`#/api/entries/${ entry }`);
     }
 
+    const editCheck = () => {
+        setPopupVisible(true);
+        console.log('we checked')
+    }
+
+    const editCheckClose = () => {
+        setPopupVisible(false);
+    }
+
     if(!_wallet) {
         return null;
     }
@@ -160,7 +201,7 @@ const DoubleWallet = () => {
                 { editNameToggle ? 
                     <span id='wallet-name'> 
                         { _wallet.name } 
-                        <span style={{ marginLeft: '.25em' }} className='edit-button' onClick={ toggleNameInput }>
+                        <span style={{ marginLeft: '.5em' }} className='edit-button' onClick={ () => editCheck() }>
                             <i style={{ cursor: 'pointer' }} className="fa-regular fa-pen-to-square fa-2xs"></i>
                         </span>
                     </span> 
@@ -177,6 +218,12 @@ const DoubleWallet = () => {
             {width > 1024 && (
                 <div id='wallet-marquee'>
                     <MarqueeStats />
+                </div>
+            )}
+
+            {width < 1024 && (
+                <div className='create-new-entry'>
+                    CREATE NEW ENTRY
                 </div>
             )}
 
@@ -251,18 +298,18 @@ const DoubleWallet = () => {
                                             <div id={ 'entry-type' }>
                                                 { entry.isSale ? 
                                                     <span style={{ color: 'red' }}>
-                                                        Sell
+                                                        SELL
                                                     </span> 
                                                     : 
                                                     <span style={{ color: 'green' }}>
-                                                        Buy
+                                                        BUY
                                                     </span>}
                                             </div>
                                         </div>
 
                                     
 
-                                        <div id="entry-date-container">
+                                        <div id="entry-date-container" onClick={() => entryNavigate(entry.id)}>
                                                 <div id='entry-date-inner-container'>
                                                 <div className='magnifying-glass-only'>    
                                                 <i className="fa-solid fa-magnifying-glass fa-xs"></i>
@@ -348,6 +395,52 @@ const DoubleWallet = () => {
                     Delete { _wallet.name }
                 </span>
             </div>
+
+            { isPopupVisible && (
+                <div className='modalBackground'>
+                    <div className='modal-title'>
+                        Edit Wallet Name
+                    </div>
+                    <div className="modalContainer">
+                        <TextFieldStyled 
+                            sx={{
+                                borderBottomColor: '#33bbce'
+                            }}
+                            fullWidth 
+                            autoFocus
+                            variant='standard' 
+                            value={ name } 
+                            onChange={ ev => setName(ev.target.value) } 
+                        />
+
+                        <div>
+
+                            <SaveButtonStyled
+                                sx={{
+                                    backgroundColor: '#33bbce',
+                                }}
+                                type='submit'
+                                variant='contained' 
+                                onClick={ updateName }
+                                disabled={ !name > 0 ? true : false }
+                            >
+                                Save
+                            </SaveButtonStyled>
+
+                                <CloseButtonStyled 
+                                    sx={{
+                                        backgroundColor: '#c9c9c9',
+                                        color: 'white'
+                                    }}
+                                    variant='contained' 
+                                    onClick={editCheckClose}
+                                >
+                                    Close
+                                </CloseButtonStyled>
+                            </div>
+                        </div>
+                </div>
+            )}
         </div>
     );
 };
