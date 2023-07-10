@@ -835,7 +835,6 @@ input:focus{
 }
 
 .entry-line-title{
-  /* display: inline; */
   padding-bottom: .5rem;
   padding-right: .75rem;
   padding-top: .5rem;
@@ -1100,6 +1099,116 @@ input:focus{
   margin-top: 1.5rem;
 }
 
+
+/* FOOTER */
+
+.wallet-footer-container{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--beige);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* padding: 2rem; */
+}
+
+.wallet-footer-inner{
+  width: 100%;
+}
+
+
+#summary-container{
+  padding: 2rem;
+  padding-top: 1.25rem;
+  font-size: 1.5rem;
+}
+
+#ft-summary-container-small{
+  padding: 1rem;
+  padding-bottom: 1rem;
+  font-size: 3vw;
+}
+
+.ft-title-alltime{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  /* border-bottom: 2px solid #535353; */
+}
+
+#ft-stats-title{
+  display: flex;
+  flex: 1;
+  font-size: 3vw;
+  align-items: center;
+  flex-direction: column;
+}
+
+#ft-summary-alltime{
+  flex: 2;
+  justify-content: flex-end;
+}
+
+#ft-total-values-container{
+  display: flex;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+}
+
+.summary-title{
+  font-weight: 700;
+}
+
+#total-values-container, #summary-avgspend-container, #realized-unrealized-container{
+  display: flex;
+}
+
+#ft-summary-avgspend-container{
+  display: flex;
+}
+
+#ft-summary-realized-title{
+  flex: 1;
+}
+
+#ft-alltime{
+  flex: 1.5;
+  justify-content: flex-end;
+}
+
+.ft-totalBTC{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--gold);
+  padding: .75rem;
+  padding-top: 1rem;
+  font-size: 4vw;
+}
+
+#summary-unrealized-title{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1.5
+}
+
+#summary-total-usd, #summary-spend{
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+
+
+
+
+
 /* RE-SIZING */
 
 @media screen and (max-width: 1350px) {
@@ -1255,7 +1364,7 @@ input:focus{
   }
 
   #wallet-detail-title{
-    font-size: 1.25rem;
+    font-size: 5vw;
     padding-top: .75rem;
     padding-bottom: .75rem;
   }
@@ -1405,6 +1514,10 @@ input:focus{
 
   .magnifying-glass-only{
     display: none;
+  }
+
+  .outer-list-container{
+    padding-bottom: 9rem;
   }
     
 }

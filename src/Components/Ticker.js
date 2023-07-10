@@ -10,6 +10,7 @@ import DoubleWallet from './DoubleWallet';
 import DoubleEntry from './DoubleEntry';
 import ProfileDetail from './ProfileDetail';
 import WalletStats from './WalletStats';
+import WalletFooter from './WalletFooter';
 
 const Ticker = () => {
 
@@ -73,6 +74,8 @@ const Ticker = () => {
                     }
                 </div>
             </div>
+
+            { hash.includes('wallets') && <WalletFooter />}
         </div>
     );
 };
