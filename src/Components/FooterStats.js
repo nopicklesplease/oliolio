@@ -111,7 +111,7 @@ const WalletStats = () => {
                         <div className='ft-totalBTC'>
 
 
-                        <span className='summary-title'>Total BTC</span>: { btcTotal().toFixed(8) } @ { custLocaleString(usdAvg()) }
+                        <span className='summary-title'>Total BTC</span>: { btcTotal().toFixed(8) } {btcSubtotal > 0 && <span style={{marginLeft: '.25rem'}}>@ { custLocaleString(usdAvg()) }</span>}
                 </div>
             <div id='ft-summary-container-small'>
                 <div className='ft-title-alltime'>
@@ -128,7 +128,11 @@ const WalletStats = () => {
                         { (soldTotal >= 0) && (
                             <div id='ft-summary-alltime' className='entry-line'>
 
-                            <span className='summary-title'>Unrealized +/-</span>: <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num'} id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc())})</span>
+                            <span className='summary-title'>Unrealized +/-</span>: <span className={ (usdDiff() >= 0) ? 'pos-num' : 'neg-num'} id='summary-unrealized'>
+                                    { custLocaleString(usdDiff()) } 
+                                    {btcSubtotal > 0 && <span style={{marginLeft: '.25rem'}}>({ custPerc(usdPerc())})
+                                    </span>}
+                                </span>
 
                             </div>
                         ) }
@@ -142,7 +146,7 @@ const WalletStats = () => {
                         </div> 
 
                         <div className='entry-line' id='ft-alltime'>
-                        <span className='summary-title'>All-Time +/-</span>:  <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
+                        <span className='summary-title'>All-Time +/-</span>:  <span className={ (allTimeDiff() >= 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
                     </div>
                 </div>
             ) : '' } */}

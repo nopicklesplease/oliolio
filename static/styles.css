@@ -286,7 +286,17 @@ input:focus{
   background-color: #fff6d8;
   color: var(--lightblue);
   padding: 12px 16px;
-  font-size: 4vw;
+  font-size: 1rem;
+}
+
+.wallet-dropdown-content li:first-child{
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.wallet-dropdown-content li:last-child{
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 #wallet-dropdown-create {
@@ -312,7 +322,7 @@ input:focus{
   display: none;
   position: absolute;
   background-color: #fff6d8;
-  min-width: 120px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
   margin-left: 10px;
   z-index: 6;
@@ -331,7 +341,7 @@ input:focus{
   background-color: #fff6d8;
   color: var(--lightblue);
   padding: 12px 16px;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .dropdown-content a:hover{
@@ -1321,7 +1331,7 @@ input:focus{
   }
 
   .dropdown-content{
-    margin-left: -5.25rem;
+    margin-left: -4rem;
     justify-content: flex-end;
   }
 
