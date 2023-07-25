@@ -17,7 +17,7 @@ section{
 .container{
     width: auto;
     height: auto;
-    padding: 40px;
+    margin: 40px;
 }
 
 .panel{

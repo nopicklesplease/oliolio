@@ -70,7 +70,7 @@ const Summary = () => {
 
     return(
         <>
-            <div id='wallet-detail-title'>
+            <div id='wallet-detail-title' style={{padding: '1.25rem'}}>
                 Total Portfolio Summary
             </div>
 
@@ -78,44 +78,51 @@ const Summary = () => {
 
                 <div id='total-values-container' className='entry-line'>
                     <div id='summary-total-btc'>
-                        <span className='summary-title' style={{ color: 'orange' }}>Total BTC</span>: 
-                        { btcTotal().toFixed(8) }
+                        <span className='summary-title' style={{ color: 'orange' }}>BTC Total</span><span className='summary-colon'>:</span> 
+                        <span className='summary-stat'>{ btcTotal().toFixed(8) }</span>
                     </div>
 
                     <div id='summary-total-usd'>
-                        <span className='summary-title' style={{color: '#33bbce'}}>USD Value</span>: { custLocaleString(usdTotal()) }
+                        <span className='summary-title' style={{color: '#33bbce'}}>USD Value</span><span className='summary-colon'>:</span> <span className='summary-stat'>{ custLocaleString(usdTotal()) }</span>
                     </div>
                 </div>
 
                 <div id='summary-avgspend-container' className='entry-line'>
                     { (_entries.length > 0) ? (
                         <div id='summary-avg'>
-                            <span className='summary-title'>USD Avg.</span>: { custLocaleString(usdAvg()) }
+                            <span className='summary-title'>USD Avg.</span><span className='summary-colon'>:</span> <span className='summary-stat'>{ custLocaleString(usdAvg()) }</span>
                         </div>) 
                     : '' }
 
                     { (_entries.length > 0) ? (
                         <div id='summary-spend'>
-                            <span className='summary-title'>USD Spend</span>: { custLocaleString(usdSpend()) }
+                            <span className='summary-title'>USD Spend</span><span className='summary-colon'>:</span> <span className='summary-stat'>{ custLocaleString(usdSpend()) }</span>
                         </div>
                     ) : ''}
                 </div>
 
+                { (_entries.length > 0 && (
+                    <div id='summary-separator'>
+                    </div>
+                ))}
+
                 { (_entries.length > 0) ? (
-                    <div className='entry-line'>
-                        <span className='summary-title'>Unrealized +/-</span>: <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc()) })</span>
+                    <div className='entry-line' style={{marginBottom: '.5rem'}}>
+                        <span className='weight-summary-title'>Unrealized +/- :</span> 
+                        
+                        <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc()) })</span>
                     </div>
                 ) : '' }
 
                 { (soldTotal > 0) ? (
-                    <div className='entry-line'>
-                        <span className='summary-title'>Realized +/-</span>: <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
+                    <div className='entry-line' style={{marginBottom: '.5rem'}}>
+                        <span className='weight-summary-title' >Realized +/- :</span> <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
                     </div>
                 ) : '' }
 
                 { (soldTotal > 0) ? (
-                    <div className='entry-line'>
-                        <span className='summary-title'>All-Time +/-</span>:  <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
+                    <div className='entry-line' style={{marginBottom: '.5rem'}}>
+                        <span className='weight-summary-title'>All-Time +/- :</span> <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
                     </div>
                 ) : '' }
             </div>

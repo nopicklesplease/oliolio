@@ -119,16 +119,38 @@ input:focus{
   cursor: pointer;
 }
 
+.entry-edit-delete{
+  display: flex;
+  justify-content: center;
+}
 
+.editEntry-title{
+  font-size: 1.5rem;
+}
 
 #entry-txid{
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  font-size: 3.5vw;
+  font-weight: 700;
+  padding: .75rem;
   margin-bottom: 1rem;
-  background-color: #ffd04e;
+  background-color: var(--gold);
+}
 
+#entry-delete{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.5vw;
+  font-weight: 700;
+  padding: .75rem;
+  margin-bottom: 1rem;
+  background-color: var(--pink);
+  color: red;
 }
 
 #wallet-marquee{
@@ -437,6 +459,14 @@ input:focus{
   font-weight: 700;
 }
 
+.ft-summary-title{
+  font-weight: 700;
+}
+
+.weight-summary-title{
+  font-weight: 700;
+}
+
 #total-values-container, #summary-avgspend-container, #realized-unrealized-container{
   display: flex;
 }
@@ -465,6 +495,12 @@ input:focus{
 #summary-total-usd, #summary-spend{
   display: flex;
   justify-content: flex-end;
+}
+
+#summary-separator{
+  border-top: 1px solid #cecece;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 #btc-logo{
@@ -549,7 +585,7 @@ input:focus{
   border-radius: 5px;
   /* padding-left: 2em;
   padding-right: 2em; */
-  box-shadow: 8px 8px var(--blueShadow);
+  box-shadow: 4px 4px var(--blueShadow);
 }
 
 .inner-list-container ul{
@@ -792,10 +828,10 @@ input:focus{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
   font-size: 3.5vw;
-  margin-bottom: .75rem;
+  margin-bottom: 1rem;
   font-weight: 700;
 }
 
@@ -812,6 +848,10 @@ input:focus{
   padding-bottom: .75rem;
   padding-top: .75rem;
   border-bottom: 1px dashed black;
+}
+
+.list-items:first-child{
+  padding-top: .4rem;
 }
 
 .list-items:last-child{
@@ -1075,7 +1115,7 @@ input:focus{
 
 .modal-title{
   width: 80%;
-  margin-left: 1.25rem;
+  padding-left: .5rem;
   margin-bottom: .25rem;
   font-size: 6vw;
   color: var(--lightblue);
@@ -1131,7 +1171,6 @@ input:focus{
 
 #summary-container{
   padding: 2rem;
-  padding-top: 1.25rem;
   font-size: 1.5rem;
 }
 
@@ -1141,6 +1180,21 @@ input:focus{
   font-size: 3vw;
 }
 
+#ft-stats-title{
+  display: flex;
+  flex: 1;
+  font-size: 3vw;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ft-summary-total-usd{
+  display: flex;
+  justify-content: flex-start; 
+  width: 100%;
+}
+
+
 .ft-title-alltime{
   display: flex;
   align-items: center;
@@ -1148,14 +1202,6 @@ input:focus{
   padding-top: .5rem;
   padding-bottom: .5rem;
   /* border-bottom: 2px solid #535353; */
-}
-
-#ft-stats-title{
-  display: flex;
-  flex: 1;
-  font-size: 3vw;
-  align-items: center;
-  flex-direction: column;
 }
 
 #ft-summary-alltime{
@@ -1167,10 +1213,6 @@ input:focus{
   display: flex;
   padding-bottom: .5rem;
   padding-top: .5rem;
-}
-
-.summary-title{
-  font-weight: 700;
 }
 
 #total-values-container, #summary-avgspend-container, #realized-unrealized-container{
@@ -1193,6 +1235,7 @@ input:focus{
 .ft-totalBTC{
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   width: 100%;
   background-color: var(--gold);
   padding: .75rem;
@@ -1380,7 +1423,11 @@ input:focus{
   }
 
   #delete-wallet-title{
-    font-size: 1rem;
+    font-size: 4vw;
+  }
+
+  #back-to-wallet-title{
+    font-size: 4vw;
   }
 
   #wallet-line-items{
@@ -1520,6 +1567,7 @@ input:focus{
 
   .entry-line{
     width: 100%;
+    justify-content: flex-start;
   }
 
   .magnifying-glass-only{
@@ -1529,5 +1577,40 @@ input:focus{
   .outer-list-container{
     padding-bottom: 9rem;
   }
+
+  #summary-total-btc, #summary-total-usd, #summary-avg, #summary-spend{
+    font-size: 1rem;
+    flex-direction: column;
+  }
+
+  #summary-realized, #summary-alltime{
+    font-size: 1rem;
+  }
+
+  #summary-total-usd, #summary-spend{
+    align-items: flex-end;
+  }
+
+  #summary-unrealized{
+    font-size: 1rem;
+  }
+
+  .summary-title{
+    font-size: 1.4rem;
+    margin-bottom: .15rem;
+  }
+
+  .weight-summary-title{
+    font-size: 1rem;
+  }
+
+  .summary-colon{
+    display: none;
+  }
+
+  .summary-stat{
+    display: block;
+  }
+  
     
 }

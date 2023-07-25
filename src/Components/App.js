@@ -11,6 +11,7 @@ import Calculator from './Calculator';
 const App = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
+
   useEffect(()=> {
     dispatch(loginWithToken());
     dispatch(fetchBtc());

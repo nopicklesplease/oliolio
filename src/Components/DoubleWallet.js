@@ -177,11 +177,11 @@ const DoubleWallet = () => {
 
     document.addEventListener('mousedown', closePopupWindow)
 
-    if(!_wallet) {
+    if(!wallets) {
         return null;
     }
 
-    if(!wallets) {
+    if(!entries) {
         return null;
     }
 
