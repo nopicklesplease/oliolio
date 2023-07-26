@@ -10,14 +10,6 @@ const User = conn.define('user', {
     primaryKey: true,
     defaultValue: UUIDV4
   },
-  username: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    },
-    unique: true
-  },
   password: {
     type: STRING,
     allowNull: false,
@@ -29,17 +21,10 @@ const User = conn.define('user', {
     type: STRING,
     validate: {
       isEmail: true
-    }
+    },
+    unique: true
   },
-  isAdmin: {
-    type: BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  imageUrl: {
-    type: TEXT,
-    allowNull: true
-  },
+
 });
 
 
@@ -70,12 +55,13 @@ User.prototype.generateToken = function(){
   return jwt.sign({ id: this.id }, JWT);
 };
 
-User.authenticate = async function({ username, password }){
+User.authenticate = async function({ email, password }){
   const user = await this.findOne({
     where: {
-      username
+      email
     }
   });
+  console.log('getting here at least', user);
   if(user && await bcrypt.compare(password, user.password)){
     return jwt.sign({ id: user.id }, JWT);
   }

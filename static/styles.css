@@ -1,6 +1,7 @@
 body {
   font-family: 'League Spartan';
   background-color: #fbfbfb;
+  margin: 0;
   /* margin: 1rem; */
   color: #2a603f;
 }
@@ -44,7 +45,7 @@ input:focus{
 #left-side-outer-container{
   flex: 1;
   margin-bottom: 1.5rem;
-  padding-top: .5rem;
+  /* padding-top: .5rem; */
   /* border: 1px solid red; */
 }
 
@@ -467,6 +468,10 @@ input:focus{
   font-weight: 700;
 }
 
+.summary-colon{
+  margin-right: .25rem;
+}
+
 #total-values-container, #summary-avgspend-container, #realized-unrealized-container{
   display: flex;
 }
@@ -581,7 +586,7 @@ input:focus{
   margin-right: .5rem;
   height: auto;
   background-color: white;
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   border-radius: 5px;
   /* padding-left: 2em;
   padding-right: 2em; */
@@ -644,9 +649,9 @@ input:focus{
   flex: 1;
 }
 
-#profile-left-container{
+/* #profile-left-container{
   padding-right: 2rem;
-}
+} */
 
 #profile-img-container{
   display: flex;
@@ -680,8 +685,10 @@ input:focus{
 }
 
 #associated-wallets{
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-weight: 700;
+  border-bottom: 1px solid #535353;
 }
 
 #associated-wallet-container{
@@ -701,10 +708,11 @@ input:focus{
 
 #associated-wallet-name{
   flex: 1;
+  margin-bottom: .25rem;
 }
 
 .edit-button, .save-button{
-  margin-left: .5rem;
+  margin-left: .35rem;
   color: #33bbce;
   cursor: pointer;
 }
@@ -779,6 +787,13 @@ input:focus{
 
 #login-form-container{
   font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.mui-form{
+  text-align: center;
 }
 
 #no-login{
@@ -1318,8 +1333,8 @@ input:focus{
     flex: 5;
   }
 
-  #header-title{
-    font-size: 5rem;
+  #header-title a{
+    font-size: 10vw;
   }
 
   #logo-img-container{
@@ -1335,11 +1350,24 @@ input:focus{
     margin-left: -5.25rem;
     justify-content: flex-end;
   }
+
+  .outer-list-container{
+    flex: 10;
+    height: auto;
+    margin-left: 0;
+    margin-bottom: 5rem;
+    margin-top: -.35rem;
+  }
+
+  .inner-list-container{
+    margin-right: 0;
+    box-shadow: 4px 4px var(--blueShadow);
+  }
     
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1024px) {
 
   #content-body{
     flex-direction: column;
@@ -1358,7 +1386,7 @@ input:focus{
   }
 
   #hidden{
-    font-size: 1.25rem;
+    font-size: 5vw;
   }
 
   #logo-img-container{
@@ -1401,19 +1429,6 @@ input:focus{
   
   .wallet-dropdown-object{
     font-size: 1rem;
-  }
-
-  .outer-list-container{
-    flex: 10;
-    height: auto;
-    margin-left: 0;
-    margin-bottom: 5rem;
-    margin-top: -.35rem;
-  }
-  
-  .inner-list-container{
-    margin-right: 0;
-    box-shadow: 4px 4px var(--blueShadow);
   }
 
   #wallet-detail-title{
@@ -1583,7 +1598,7 @@ input:focus{
     flex-direction: column;
   }
 
-  #summary-realized, #summary-alltime{
+  #summary-realized, #summary-alltime, #summary-unrealized{
     font-size: 1rem;
   }
 
@@ -1591,13 +1606,8 @@ input:focus{
     align-items: flex-end;
   }
 
-  #summary-unrealized{
-    font-size: 1rem;
-  }
-
   .summary-title{
     font-size: 1.4rem;
-    margin-bottom: .15rem;
   }
 
   .weight-summary-title{
@@ -1610,7 +1620,41 @@ input:focus{
 
   .summary-stat{
     display: block;
+    margin-top: .25rem;
+  }
+
+  #login-title-container{
+    font-size: 25vw;
   }
   
     
+}
+
+@media screen and (max-width: 400px) {
+
+  #summary-realized, #summary-alltime, #summary-unrealized{
+    font-size: .9rem;
+  }
+
+  .weight-summary-title{
+    font-size: .9rem;
+  }
+
+  #header-title{
+    font-size: 2rem;
+  }
+
+}
+
+@media screen and (max-width: 375px) {
+
+  #summary-realized, #summary-alltime, #summary-unrealized{
+    font-size: .85rem;
+  }
+
+  .weight-summary-title{
+    font-size: .85rem;
+  }
+
+
 }

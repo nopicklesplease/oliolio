@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { createWallet, fetchWallets } from '../store';
+import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -46,6 +47,7 @@ const CreateWallet = () => {
             </div>
             <div id='create-wallet-detail'>
 
+            <form className='mui-form' onSubmit={ create }>
                 <TextFieldStyled 
                     sx={{
                         borderColor: '#33bbce'
@@ -54,23 +56,24 @@ const CreateWallet = () => {
                     fullWidth 
                     autoFocus
                     variant='standard'
-                    placeholder='Wallet Name' 
+                    placeholder='Wallet Name'
+                    inputProps={{ maxLength: 30 }}
                     onChange={ ev => setName(ev.target.value) }
                 />
-
-                <div className='create-wallet-button'>
                     <SaveButtonStyled
                         sx={{
                             backgroundColor: '#33bbce',
+                            marginTop: '2rem'
                         }}
                         type='submit'
                         variant='contained' 
-                        onClick={ create }
                         disabled={ !name > 0 ? true : false }
                     >
                         Create Wallet
                     </SaveButtonStyled>
-                </div>
+
+            </form>
+
             </div>
         </div>
     );

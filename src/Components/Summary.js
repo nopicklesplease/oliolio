@@ -77,9 +77,10 @@ const Summary = () => {
             <div id='summary-container'>
 
                 <div id='total-values-container' className='entry-line'>
+
                     <div id='summary-total-btc'>
                         <span className='summary-title' style={{ color: 'orange' }}>BTC Total</span><span className='summary-colon'>:</span> 
-                        <span className='summary-stat'>{ btcTotal().toFixed(8) }</span>
+                        <span className='summary-stat'><i className="fa-solid fa-bitcoin-sign fa-sm" style={{marginRight: '.25rem'}}></i>{ btcTotal().toFixed(8) }</span>
                     </div>
 
                     <div id='summary-total-usd'>
@@ -90,7 +91,8 @@ const Summary = () => {
                 <div id='summary-avgspend-container' className='entry-line'>
                     { (_entries.length > 0) ? (
                         <div id='summary-avg'>
-                            <span className='summary-title'>USD Avg.</span><span className='summary-colon'>:</span> <span className='summary-stat'>{ custLocaleString(usdAvg()) }</span>
+                            <span className='summary-title'>USD Avg.</span><span className='summary-colon'>:</span> 
+                            <span className='summary-stat'>{ custLocaleString(usdAvg()) }</span>
                         </div>) 
                     : '' }
 

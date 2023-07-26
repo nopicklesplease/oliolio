@@ -7,6 +7,7 @@ module.exports = app;
 
 app.post('/', async(req, res, next)=> {
   try {
+    console.log('this is my body', req.body);
     res.send(await User.authenticate(req.body));
   }
   catch(ex){

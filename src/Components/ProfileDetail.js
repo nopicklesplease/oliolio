@@ -2,7 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { updateUser, destroyEntry, destroyWallet } from '../store';
-import { Input } from '@mui/material';
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+
+const TextFieldStyled = styled(TextField)({
+    "& .MuiInput-underline:after":{
+        borderBottomColor: 'orange'
+    }
+})
+
+const SaveButtonStyled = styled(Button)({
+    '&:hover': {
+        backgroundColor: 'orange',
+    },
+})
+
+const CloseButtonStyled = styled(Button)({
+    '&:hover': {
+        backgroundColor: '#c9c9c9',
+    },
+})
 
 const ProfileDetail = () => {
 
@@ -14,38 +34,25 @@ const ProfileDetail = () => {
     const [email, setEmail] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [username, setUsername] = useState('');
-    const [editUsernameToggle, setEditUsernameToggle] = useState(true);
-    const [editEmailToggle, setEditEmailToggle] = useState(true);
+    const [isPopupVisible, setPopupVisible] = useState(false);
+    const [popupTitle, setPopupTitle] = useState('');
+
+    const popupWindow = useRef(null);
 
     const dispatch = useDispatch();
-    const ref = useRef();
-
-    const toggleEmailInput = () => {
-        setEditEmailToggle(false);
-    }
-
-    const toggleUsernameInput = () => {
-        setEditUsernameToggle(false);
-    }
 
     const updateEmail = async(ev) => {
         ev.preventDefault();
         const { id } = auth;
         await dispatch(updateUser({ id, email }));
-        setEditEmailToggle(true);
-    }
-
-    const updateImage = async(ev) => {
-        ev.preventDefault();
-        const { id } = auth;
-        await dispatch(updateUser({id, imageUrl}));
+        setPopupVisible(false);
     }
 
     const updateUsername = async(ev) => {
         ev.preventDefault();
         const { id } = auth;
         await dispatch(updateUser({id, username}));
-        setEditUsernameToggle(true);
+        setPopupVisible(false);
     }
 
     const _destroyWallet = (wallet) => {
@@ -61,26 +68,28 @@ const ProfileDetail = () => {
     useEffect(() => {
         if(auth){
             setEmail(auth.email);
-            setImageUrl(auth.imageUrl);
             setUsername(auth.username);
         }
     }, [auth])
 
-    useEffect(() => {
-        ref.current.addEventListener('change', (ev) => {
-            const file = ev.target.files[0];
-            const reader = new FileReader();
-            
-            reader.readAsDataURL(file);
-            reader.addEventListener('load', () => {
-                setImageUrl(reader.result);
-                auth.imageUrl = reader.result;
-                
-            })
-        });
-    }, [ref]);
-
     const _wallets = wallets.filter(wallet => wallet.userId === auth.id);
+
+    const editCheck = (title) => {
+        setPopupVisible(true);
+        setPopupTitle(title);
+    }
+
+    const editCheckClose = () => {
+        setPopupVisible(false);
+    }
+
+    const closePopupWindow = (e) => {
+        if(popupWindow.current && !popupWindow.current.contains(e.target)){
+            setPopupVisible(false);
+        }
+    }
+
+    document.addEventListener('mousedown', closePopupWindow)
 
     if(!auth){
         return null;
@@ -89,50 +98,31 @@ const ProfileDetail = () => {
     return(
         <>
             <div id='wallet-detail-title'>
-                { editUsernameToggle ? 
-                    <span id='username'>{ auth.username } 
-                        <span style={{ marginLeft: '.25em' }} className='edit-button' onClick={ toggleUsernameInput }>
-                            <i style={{ cursor: 'pointer' }} className="fa-regular fa-pen-to-square fa-2xs"></i>
-                        </span>
+                    <span id='username'>Profile 
                     </span> 
-                : 
-                    <span>
-                        <input id='input-username' value={ username } onChange={ ev => setUsername(ev.target.value) }/>
-                            <span className='save-button' onClick={ updateUsername }>
-                                <i className="fa-regular fa-floppy-disk fa-2xs"></i>
-                            </span>
-                    </span> 
-                }
             </div>
 
             <div id='profile-container'>
                 <div id='profile-left-container'>
-                    <span style={{ fontWeight: '700' }}>
+                    <span style={{ fontWeight: '700', marginRight: '.25rem' }}>
                         Email Address: 
                     </span> 
                     <span>
-                        { editEmailToggle ? (
+
                             <span>
                                 { auth.email }
-                                <span className='edit-button' onClick={ toggleEmailInput }>
+                                <span onClick={ () => editCheck('Edit Email Address') } className='edit-button'>
                                     <i className="fa-regular fa-pen-to-square fa-xs"></i>
                                 </span>
                             </span>
-                        ) : (
-                            <span>
-                                <input style={{ width: '45%' }}value={ email } id='input-email' onChange={ ev => setEmail(ev.target.value) }/>
-                                <span className='save-button' onClick={ updateEmail }>
-                                    <i className="fa-regular fa-floppy-disk"></i>
-                                </span>
-                            </span>
-                        )}
+
                     </span>
                     <div id='profile-email-warning'>
                         Consider using a masked email address that won't reveal your personal identity. Need one? Try <a target='_blank' href='https://www.simplelogin.io'>simplelogin.io</a>.
                     </div>
 
                     <div className='entry-line-title' id='associated-wallets'>
-                        Associated Wallets:
+                        Associated Wallets
                     </div>
 
                     {_wallets.length === 0 ? 
@@ -145,37 +135,120 @@ const ProfileDetail = () => {
                                 return(
                                     <div key={ wallet.id }>
                                         <div className='entry-line' id='associated-wallet-container'>
-                                            <div id='associated-wallet-del'>
-                                                <i style={{ marginLeft: '.5rem' }} className="fa-regular fa-trash-can" onClick={ ev => _destroyWallet(wallet) }></i> 
-                                            </div>
+                                            
                                             <div id='associated-wallet-name'>
                                                 <Link to={ `#/api/wallets/${ wallet.id }` }>{ wallet.name }</Link>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 )
                             }) }
                         </>
                     }
                 </div>
-        
-                <div id='profile-right-container'>
-                    <div id='profile-img-container'>
-                        <img src={ imageUrl }/>
-                    </div>
-                    
-                    <div id='profile-form-container'>
-                        <form onSubmit ={ updateImage }>
-                            <Input type='file' ref={ ref }/>
-                            <div id='profile-button-container'>
-                                <button style={{ marginTop: '1rem', fontSize: '1rem' }}>
-                                    Update Profile Photo
-                                </button>
-                            </div>
-                        </form>       
-                    </div>  
-                </div>   
             </div>
+
+            { isPopupVisible && (
+                <div className='modalBackground'>
+                    <div className='modal-title' id={ `${ popupTitle.includes('Delete') && 'modal-title-delete' }` }>
+                        { popupTitle }
+                    </div>
+
+                    {popupTitle.includes('Email') && (
+                        <div ref={ popupWindow } className="modalContainer">
+                            
+                            <TextFieldStyled 
+                                sx={{
+                                    borderBottomColor: '#33bbce'
+                                }}
+                                fullWidth 
+                                autoFocus
+                                variant='standard' 
+                                value={ email } 
+                                inputProps={{ maxLength: 30 }}
+                                onChange={ ev => setEmail(ev.target.value) } 
+                            />
+
+                            <div className='popup-buttons'>
+
+                                <SaveButtonStyled
+                                    sx={{
+                                        backgroundColor: '#33bbce',
+                                    }}
+                                    type='submit'
+                                    variant='contained' 
+                                    onClick={ updateEmail }
+                                    disabled={ !email > 0 ? true : false }
+                                >
+                                    Save
+                                </SaveButtonStyled>
+
+                                <CloseButtonStyled 
+                                    sx={{
+                                        backgroundColor: '#c9c9c9',
+                                        color: 'white',
+                                        marginLeft: '.5rem'
+                                    }}
+                                    variant='contained' 
+                                    onClick={editCheckClose}
+                                >
+                                    Cancel
+                                </CloseButtonStyled>
+
+                            </div>
+
+                        </div>
+                    )}
+
+                    {popupTitle.includes('Username') && (
+                        <div ref={ popupWindow } className="modalContainer">
+                            
+                            <TextFieldStyled 
+                                sx={{
+                                    borderBottomColor: '#33bbce'
+                                }}
+                                fullWidth 
+                                autoFocus
+                                variant='standard' 
+                                value={ username } 
+                                inputProps={{ maxLength: 30 }}
+                                onChange={ ev => setUsername(ev.target.value) } 
+                            />
+
+                            <div className='popup-buttons'>
+
+                                <SaveButtonStyled
+                                    sx={{
+                                        backgroundColor: '#33bbce',
+                                    }}
+                                    type='submit'
+                                    variant='contained' 
+                                    onClick={ updateUsername }
+                                    disabled={ !username > 0 ? true : false }
+                                >
+                                    Save
+                                </SaveButtonStyled>
+
+                                <CloseButtonStyled 
+                                    sx={{
+                                        backgroundColor: '#c9c9c9',
+                                        color: 'white',
+                                        marginLeft: '.5rem'
+                                    }}
+                                    variant='contained' 
+                                    onClick={editCheckClose}
+                                >
+                                    Cancel
+                                </CloseButtonStyled>
+
+                            </div>
+
+                        </div>
+                    )}
+
+                </div>
+            )}
         </>
     );
 };

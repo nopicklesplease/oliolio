@@ -2,7 +2,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid blue; */
+    height: 100%;
 }
 
 #body{
@@ -14,11 +14,11 @@ section{
     height: 100%;
 }
 
-.container{
+/* .container{
     width: auto;
     height: auto;
     margin: 40px;
-}
+} */
 
 .panel{
     display: flex;
@@ -51,6 +51,8 @@ section{
 
 .btn.special{
     color: black;
+    width: 55px;
+    height: 55px;
     background-color: rgb(120, 120, 120);
 }
 

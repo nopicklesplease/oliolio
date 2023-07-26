@@ -17,19 +17,19 @@ function getRandom(arr) {
   return thing;
 }
 
-User.addHook('beforeValidate', (user) => {
-  if(!user.imageUrl){
-    user.imageUrl = `https://robohash.org/${user.id}.png?bgset=bg2`
-  }
-})
+// User.addHook('beforeValidate', (user) => {
+//   if(!user.imageUrl){
+//     user.imageUrl = `https://robohash.org/${user.id}.png?bgset=bg2`
+//   }
+// })
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
 
   const [moe, lucy, larry] = await Promise.all([
-    User.create({ username: 'moe', password: '123', email: 'moe@moe.com' }),
-    User.create({ username: 'lucy', password: '123', email: 'lucy@lucy.com' }),
-    User.create({ username: 'larry', password: '123', email: 'larry@larry.com'  }),
+    User.create({ password: '123', email: 'moe@moe.com' }),
+    User.create({ password: '123', email: 'lucy@lucy.com' }),
+    User.create({ password: '123', email: 'larry@larry.com'  }),
   ]);
 
   const [walletA, walletB, walletC, walletD, walletE, walletF, walletG] = await Promise.all([

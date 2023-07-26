@@ -77,7 +77,15 @@ const Header = () => {
         switch(true) {
             case (width > 1024):
                 return 30;
+            case (width > 900):
+                return 45;
+            case (width > 775):
+                return 40;
+            case (width > 700):
+                return 35;
             case (width > 500):
+                return 30;
+            case (width > 400):
                 return 25;
             case (width > 300):
                 return 20;
@@ -101,7 +109,7 @@ const Header = () => {
                 <div id='wallet-dropdown'>
                     <div ref={ walletMenu } className={ `wallet-dropdown ${ walletDropdownVisible ? 'visible' : '' }` }>
                         <div onClick={ walletDropdownToggle }>
-                            <i class="fa-solid fa-wallet"></i>
+                            <i className="fa-solid fa-wallet"></i>
                         </div>
 
                         <div className='wallet-dropdown-content'>

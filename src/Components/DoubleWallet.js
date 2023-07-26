@@ -56,8 +56,6 @@ const DoubleWallet = () => {
     const _wallet = wallets.find(wallet => wallet.id === id);
     const _entries = entries.filter(entry => entry.walletId === _wallet.id)
 
-    console.log('wallet name', _wallet.name)
-
     useEffect(() => {
         setName(_wallet.name);
     }, [_wallet])
@@ -190,9 +188,9 @@ const DoubleWallet = () => {
             <div id='wallet-detail-title'>
                 
                 <span id='wallet-name'> 
-                    { _wallet.name } 
-                    <span style={{ marginLeft: '.5em' }} className='edit-button' onClick={ () => editCheck('Edit Wallet Name') }>
-                        <i style={{ cursor: 'pointer' }} className="fa-regular fa-pen-to-square fa-2xs"></i>
+                    { _wallet.name }
+                    <span style={{ marginLeft: '.5em' }} className='edit-button'>
+                        <i onClick={ () => editCheck('Edit Wallet Name') } style={{ cursor: 'pointer' }} className="fa-regular fa-pen-to-square fa-2xs"></i>
                     </span>
                 </span> 
                 
@@ -205,12 +203,14 @@ const DoubleWallet = () => {
             )}
 
             {width < 1024 && (
-                <div className='create-new-entry' onClick={ () => editCheck('Create New Entry') }>
-                    CREATE NEW ENTRY
+                <div className='create-new-entry'>
+                    <span onClick={ () => editCheck('Create New Entry') }>CREATE NEW ENTRY</span>
                 </div>
             )}
 
-            {width > 1024 && <CreateEntry />}
+            {width > 1024 && (
+                <CreateEntry editCheckClose={ editCheckClose } />
+            )}
                 
             <div id='wallet-line-items'>
 
@@ -376,7 +376,7 @@ const DoubleWallet = () => {
 
             <div id='delete-wallet-title' onClick={ () => editCheck('Delete Wallet') }> 
                 <span>
-                    Delete { _wallet.name }
+                    Delete Wallet
                 </span>
             </div>
 
@@ -396,6 +396,7 @@ const DoubleWallet = () => {
                                 autoFocus
                                 variant='standard' 
                                 value={ name } 
+                                inputProps={{ maxLength: 30 }}
                                 onChange={ ev => setName(ev.target.value) } 
                             />
 

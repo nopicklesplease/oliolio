@@ -28,7 +28,7 @@ const Ticker = () => {
         };
       }, [width]);
 
-    console.log('this is the hash', hash)
+    // console.log('this is the hash', hash)
 
     const filteredWallets = wallets.filter(wallet => wallet.userId === auth.id).map(wallet => wallet.id);
 

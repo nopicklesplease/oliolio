@@ -275,12 +275,12 @@ const SingleEntry = () => {
 
                 { isPopupVisible && (
                 <div className='modalBackground'>
-                    <div className='modal-title' id={ `${ popupTitle.includes('Delete') ? 'modal-title-delete' : '' }` }>
+                    <div className='modal-title' id={ `${ popupTitle.includes('Delete') && 'modal-title-delete' }` }>
                         { popupTitle }
                     </div>
 
                     {popupTitle.includes('Edit') && (
-                        <div className="modalContainer">
+                        <div ref={ popupWindow } className="modalContainer">
                             
                             <EditEntry editCheckClose={ editCheckClose } entryPrice ={ price } entrySoldBtc = { soldBtc } entryVolume = { volume } entryIsSale = { isSale }/>
 

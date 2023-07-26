@@ -50,7 +50,7 @@ const CreateEntry = ({ editCheckClose }) => {
     const [price, setPrice] = useState('');
     const [soldBtc, setSoldBtc] = useState('');
     const [isSale, setIsSale] = useState(false);
-    const [isPopupVisible, setPopupVisible] = useState(false);
+    // const [isPopupVisible, setPopupVisible] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -123,7 +123,7 @@ const CreateEntry = ({ editCheckClose }) => {
                         label='Volume (USD)'
                         type='number'
                         InputProps={{
-                            startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i class="fa-solid fa-dollar-sign"></i></InputAdornment>
+                            startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-dollar-sign"></i></InputAdornment>
                         }}
                         onChange={ ev => setVolume(ev.target.value) } 
                     />
@@ -140,7 +140,7 @@ const CreateEntry = ({ editCheckClose }) => {
                             label='Price (USD)'
                             type='number'
                             InputProps={{
-                                startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i class="fa-solid fa-dollar-sign"></i></InputAdornment>
+                                startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-dollar-sign"></i></InputAdornment>
                             }}
                             onChange={ ev => setPrice(ev.target.value) } 
                         />
@@ -190,7 +190,7 @@ const CreateEntry = ({ editCheckClose }) => {
                         label='Volume (BTC)'
                         type='number'
                         InputProps={{
-                            startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i class="fa-solid fa-bitcoin-sign"></i></InputAdornment>
+                            startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-bitcoin-sign"></i></InputAdornment>
                         }}
                         onChange={ ev => setSoldBtc(ev.target.value) } 
                     />
@@ -207,7 +207,7 @@ const CreateEntry = ({ editCheckClose }) => {
                         label='Price (USD)'
                         type='number'
                         InputProps={{
-                            startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i class="fa-solid fa-dollar-sign"></i></InputAdornment>
+                            startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-dollar-sign"></i></InputAdornment>
                         }}
                         onChange={ ev => setPrice(ev.target.value) } 
                     />
