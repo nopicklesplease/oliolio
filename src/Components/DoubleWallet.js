@@ -197,19 +197,20 @@ const DoubleWallet = () => {
             </div>
 
             {width > 1024 && (
+                <>
                 <div id='wallet-marquee'>
                     <MarqueeStats />
                 </div>
+                <div className='wide-create-entry'>
+                    <span onClick={ () => editCheck('Create New Entry') }>CREATE NEW ENTRY</span>
+                </div>
+                </>
             )}
 
             {width < 1024 && (
                 <div className='create-new-entry'>
                     <span onClick={ () => editCheck('Create New Entry') }>CREATE NEW ENTRY</span>
                 </div>
-            )}
-
-            {width > 1024 && (
-                <CreateEntry editCheckClose={ editCheckClose } />
             )}
                 
             <div id='wallet-line-items'>

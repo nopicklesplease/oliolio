@@ -80,7 +80,7 @@ const Summary = () => {
 
                     <div id='summary-total-btc'>
                         <span className='summary-title' style={{ color: 'orange' }}>BTC Total</span><span className='summary-colon'>:</span> 
-                        <span className='summary-stat'><i className="fa-solid fa-bitcoin-sign fa-sm" style={{marginRight: '.25rem'}}></i>{ btcTotal().toFixed(8) }</span>
+                        <span className='summary-stat'><i className="fa-solid fa-bitcoin-sign fa-xs" style={{marginRight: '.25rem'}}></i>{ btcTotal().toFixed(8) }</span>
                     </div>
 
                     <div id='summary-total-usd'>

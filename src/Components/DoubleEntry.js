@@ -104,7 +104,7 @@ const SingleEntry = () => {
 
     return(
         <div>
-            <div id='wallet-detail-title' style={{padding: '1rem'}}> 
+            <div id='wallet-detail-title' style={{padding: '1.5rem'}}> 
                 <span style={{fontWeight: '700', marginRight: '.35rem'}}>TXID:</span> { entry.id.slice(24) } 
             </div>
 

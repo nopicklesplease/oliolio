@@ -42,7 +42,7 @@ const CreateWallet = () => {
     }
     return(
         <div>
-            <div id='wallet-detail-title'>
+            <div id='wallet-detail-title' style={{padding: '1.25rem'}}>
                 Create Wallet
             </div>
             <div id='create-wallet-detail'>
