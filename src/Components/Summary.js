@@ -109,7 +109,7 @@ const Summary = () => {
                 ))}
 
                 { (_entries.length > 0) ? (
-                    <div className='entry-line' style={{marginBottom: '.5rem'}}>
+                    <div style={{marginBottom: '1.5rem'}}>
                         <span className='weight-summary-title'>Unrealized +/- :</span> 
                         
                         <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc()) })</span>
@@ -117,13 +117,13 @@ const Summary = () => {
                 ) : '' }
 
                 { (soldTotal > 0) ? (
-                    <div className='entry-line' style={{marginBottom: '.5rem'}}>
+                    <div style={{marginBottom: '1.5rem'}}>
                         <span className='weight-summary-title' >Realized +/- :</span> <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
                     </div>
                 ) : '' }
 
                 { (soldTotal > 0) ? (
-                    <div className='entry-line' style={{marginBottom: '.5rem'}}>
+                    <div style={{marginBottom: '.5rem'}}>
                         <span className='weight-summary-title'>All-Time +/- :</span> <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
                     </div>
                 ) : '' }

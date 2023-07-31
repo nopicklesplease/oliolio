@@ -201,8 +201,8 @@ const DoubleWallet = () => {
                 <div id='wallet-marquee'>
                     <MarqueeStats />
                 </div>
-                <div className='wide-create-entry'>
-                    <span onClick={ () => editCheck('Create New Entry') }>CREATE NEW ENTRY</span>
+                <div className='wide-create-entry' onClick={ () => editCheck('Create New Entry') }>
+                    <span>CREATE NEW ENTRY</span>
                 </div>
                 </>
             )}
@@ -217,10 +217,6 @@ const DoubleWallet = () => {
 
                 <div className='entry-line-title'>
                     <div className='small-type-date-title'>
-
-                    <div id='entry-title-del'>
-                        DEL
-                    </div>
                     <div id='entry-title-type'>
                         TYPE
                     </div>
@@ -228,9 +224,6 @@ const DoubleWallet = () => {
                     <div id='entry-title-datetime-container'>
                         <div id='entry-title-date'>
                             DATE
-                        </div>
-                        <div id='entry-title-time'>
-                            TIME
                         </div>
                     </div>
 
@@ -272,12 +265,8 @@ const DoubleWallet = () => {
 
                                     <div className="entry-line">
 
-                                    <div className='small-type-date'>
-
-                                        <div id='entry-delete-container' onClick={ ev => _destroyEntry(entry) }>
-                                            <span className='trash-can-only'><i className="fa-regular fa-trash-can"></i></span>
-                                        </div>
-
+            
+                                            <div className='small-type-date'>
                                         <div id='entry-type-container'>
                                             <div id={ 'entry-type' }>
                                                 { entry.isSale ? 
@@ -295,15 +284,10 @@ const DoubleWallet = () => {
 
                                         <div id="entry-date-container" onClick={() => entryNavigate(entry.id)}>
                                                 <div id='entry-date-inner-container'>
-                                                <div className='magnifying-glass-only'>    
-                                                <i className="fa-solid fa-magnifying-glass fa-xs"></i>
-                                                </div> 
-                                                    <div className='entry-li' id='entry-date'>
+                                                    <div id='entry-date'>
                                                         { entry.createdAt.slice(0, 10) } 
                                                     </div>
-                                                    <div className='entry-li' id='entry-time'>
-                                                        { entry.createdAt.slice(11, 19) }
-                                                    </div>
+                                                    
                                                 </div>
                                         </div>
 
@@ -471,9 +455,9 @@ const DoubleWallet = () => {
 
                     {popupTitle.includes('Create') && (
                         <div className="modalContainer">
-                            
+                            <div ref={ popupWindow } id='create-entry-container'>
                             <CreateEntry editCheckClose={ editCheckClose }/>
-
+                            </div>
                         </div>
                     )}
                 </div>

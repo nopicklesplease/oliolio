@@ -12,6 +12,7 @@ const WalletStats = () => {
 
     const _wallet = wallets.find(wallet => wallet.id === id);
     const _entries = entries.filter(entry => entry.walletId === _wallet.id)
+    const soldEntries = _entries.filter(entry => entry.isSale === true)
 
     const dispatch = useDispatch();
 
@@ -109,9 +110,9 @@ const WalletStats = () => {
                     {_wallet.name} Summary
                 </div>
 
-                <div id='total-values-container' className='entry-line'>
+                <div id='total-values-container' style={{padding: 0}}>
                     <div id='summary-total-btc'>
-                        <span className='summary-title' style={{ color: 'orange' }}>Total BTC</span>: { btcTotal().toFixed(8) }
+                        <span className='summary-title' style={{ color: 'orange' }}>BTC Total</span>: <i className="fa-solid fa-bitcoin-sign fa-xs" style={{marginRight: '.15rem'}}></i>{ btcTotal().toFixed(8) }
                     </div>
 
                 <div id='summary-total-usd'>
@@ -119,8 +120,8 @@ const WalletStats = () => {
                 </div>
             </div>
 
-            { (_entries.length > 0) ? (
-                <div id='summary-avgspend-container' className='entry-line'>
+            { (_entries.length > 0) && (
+                <div id='summary-avgspend-container'>
                     <div id='summary-avg'>
                         <span className='summary-title'>USD Avg.</span>: { custLocaleString(usdAvg()) }
                     </div> 
@@ -128,24 +129,26 @@ const WalletStats = () => {
                         <span className='summary-title'>USD Spend</span>: { custLocaleString(usdSpend()) }
                     </div>
                 </div>
-            ) : '' }
+            )}
                 
-                { (_entries.length > 0) ? 
-                    <div id='realized-unrealized-container' className='entry-line'>
-                        <div id='summary-realized-title'>
-                            <span className='summary-title'>Realized +/-</span>: <span className={ (soldTotal >= 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
-                        </div> 
-                        <div id='summary-unrealized-title'>
-                            <span className='summary-title'>Unrealized +/-</span>: <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num'} id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc())})</span>
-                        </div>
+            { (_entries.length > 0) && 
+                <div id='realized-unrealized-container' className='entry-line'>
+                    {(soldEntries.length > 0) &&
+                    <div id='summary-realized-title'>
+                        <span className='summary-title'>Realized +/-</span>: <span className={ (soldTotal >= 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
+                    </div> 
+                    }
+                    <div id='summary-unrealized-title'>
+                        <span className='summary-title'>Unrealized +/-</span>: <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num'} id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc())})</span>
                     </div>
-                : '' }
+                </div>
+            }
 
-                { (soldTotal >= 0) ? (
-                    <div className='entry-line'>
+                { (soldEntries.length > 0) && (
+                    <div style={{marginTop: '1rem'}}>
                         <span className='summary-title'>All-Time +/-</span>:  <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
                     </div>
-                ) : '' }
+                )}
             </div>
         </>
     );

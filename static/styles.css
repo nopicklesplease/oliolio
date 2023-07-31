@@ -177,6 +177,7 @@ input:focus{
   margin-bottom: 1rem;
   font-weight: 700;
   cursor: pointer;
+  font-size:1.5vw;
 }
 
 #entry-txid-text{
@@ -184,7 +185,7 @@ input:focus{
   align-items: center;
   width: 100%;
   height: 50px;
-  font-size: .9rem;
+  font-size: 1.1vw;
   overflow: hidden;
   -moz-transform:translateX(100%);
   -webkit-transform:translateX(100%);	
@@ -557,7 +558,7 @@ input:focus{
   display: flex;
   justify-content: flex-end;
   margin-top: -.5rem;
-  font-size: 1rem;
+  font-size: 1.5vw;
   padding-right: .4rem;
   /* border: 1px solid red; */
 }
@@ -591,6 +592,7 @@ input:focus{
   height: auto;
   margin-left: 1rem;
   padding-bottom: 2rem;
+  margin-bottom: 5rem;
   /* z-index: auto;
   display: relative; */
 }
@@ -881,7 +883,7 @@ input:focus{
 }
 
 .list-items:first-child{
-  padding-top: .4rem;
+  padding-top: .75rem;
 }
 
 .list-items:last-child{
@@ -898,12 +900,10 @@ input:focus{
 }
 
 .entry-line{
-  /* display: inline; */
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  /* padding-bottom: .75rem;
-  padding-top: .75rem;
-  border-bottom: 1px dashed black; */
+  width: 100%;
 }
 
 .entry-line a{
@@ -916,7 +916,6 @@ input:focus{
 
 .entry-line-title{
   padding-bottom: .5rem;
-  padding-right: .75rem;
   padding-top: .5rem;
   border-bottom: 2px solid #535353;
   display: flex;
@@ -925,10 +924,11 @@ input:focus{
 
 #entry-delete-container{
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  padding-left: .25rem;
   align-items: center;
   padding-bottom: .25rem;
-  flex: .25;
+  flex: .18;
   cursor: pointer;
   font-size: 1.25rem;
 }
@@ -937,14 +937,41 @@ input:focus{
   margin-left: .25rem;
 }
 
+.small-type-date-title{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.small-type-date{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+#entry-btc-container{
+  flex: 2.5;
+}
+
+#entry-diff-container{
+  flex: 3.25;
+}
+
+#entry-value-volume-container{
+  flex: 3.25;
+}
+
 #entry-title-del{
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
   padding-left: .25rem;
   flex: .3;
   font-weight: 700;
 }
+
+
 
 #entry-edit-container{
   display: flex;
@@ -956,12 +983,17 @@ input:focus{
 
 #entry-title-type{
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  /* justify-content: flex-start; */
+  align-items: flex-start;
   flex: .45;
   font-weight: 700;
-  margin-left: .5rem;
 }
+
+/* #entry-title-date{
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid blue;
+} */
 
 #entry-title-edit{
   display: flex;
@@ -979,11 +1011,11 @@ input:focus{
   margin-right: .5rem;
 }
 
-#entry-title-date, #entry-title-edit, #entry-title-btc, #entry-title-value, #entry-title-totaldiff{
+#entry-title-edit, #entry-title-btc, #entry-title-value, #entry-title-totaldiff{
   font-weight: 700;
 }
 
-#entry-title-time, #entry-title-price, #entry-title-costbasis, #entry-title-totalperc{
+#entry-title-time, #entry-title-price, #entry-title-date, #entry-title-costbasis, #entry-title-totalperc{
   font-size: .85rem;
 }
 
@@ -993,7 +1025,8 @@ input:focus{
 
 #entry-date-container{
   display: flex;
-  align-items: flex-end;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex: 1;
 }
 
@@ -1008,7 +1041,7 @@ input:focus{
 }
 
 #entry-date{
-  font-weight: 700;
+  font-weight: 500;
 }
 
 #entry-type-container{
@@ -1016,11 +1049,8 @@ input:focus{
   justify-content: center;
   align-items: center;
   flex: .45;
-  /* border: 1px solid black; */
   font-weight: 700;
-  margin-left: .5rem;
   font-size: 1.25rem;
-  /* border: 1px solid blue; */
 }
 
 .entry-field-input{
@@ -1030,12 +1060,15 @@ input:focus{
 
 #entry-btc-container, #entry-value-volume-container, #entry-diff-container, #entry-date-container{
   display: flex;
-  flex: 1;
   flex-direction: column;
 }
 
-#entry-btc-container, #entry-date-container, #entry-type-container{
+#entry-btc-container{
   padding: .25rem;
+}
+
+#entry-date-container{
+  padding-top: .25rem;
 }
 
 #entry-btc-container{
@@ -1052,7 +1085,7 @@ input:focus{
 
 #entry-sold-container, #entry-na-container{
   display: flex;
-  flex: 1;
+  flex: 3.25;
   align-items: center;
   justify-content: flex-end;
 }
@@ -1195,7 +1228,7 @@ input:focus{
 
 #summary-container{
   padding: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.75vw;
 }
 
 #ft-summary-container-small{
@@ -1301,6 +1334,26 @@ input:focus{
   #header-title-outer-container{
     flex: 2.5;
   }
+
+  #realized-unrealized-container{
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  #summary-unrealized-title{
+    margin-bottom: 1rem;
+  }
+
+  #summary-realized-title{
+    margin-bottom: .5rem;
+  }
+  
+}
+
+@media screen and (max-width: 1300px) {
+
+  #summary-container{
+    font-size: 1.25rem;
+  }
   
 }
 
@@ -1314,9 +1367,17 @@ input:focus{
     font-size: 3.5rem;
   }
 
+  #entry-txid-text{
+    font-size: 1.05vw;
+  }
+
 }
 
 @media screen and (max-width: 1024px) {
+
+  .list-items:first-child{
+    padding-top: .4rem;
+  }
 
   .modal-title{
     font-size: 6vw;
@@ -1369,6 +1430,14 @@ input:focus{
 
 @media screen and (max-width: 1024px) {
 
+  #entry-na-container, #entry-sold-container{
+    flex: 1;
+  }
+
+  #entry-diff-container{
+    flex: 1;
+  }
+
   .modalContainer{
     font-size: 2vw;
   }
@@ -1412,7 +1481,7 @@ input:focus{
 
   #logo-current-price{
     margin-top: -.25rem;
-    font-size: 2.5vw;
+    font-size: 3vw;
   }
 
   #left-side-lower-body{
@@ -1527,7 +1596,6 @@ input:focus{
 
   #entry-type{
     flex: .45;
-    /* margin-left: .5rem; */
     font-size: 3vw;
     margin-bottom: .15rem;
   }
@@ -1567,18 +1635,6 @@ input:focus{
     font-size: 2.5vw;
   }
 
-  .small-type-date-title{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .small-type-date{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-  }
-
   #entry-btc-container{
     flex: 1.25;
     padding: 0;
@@ -1599,12 +1655,12 @@ input:focus{
   }
 
   #summary-total-btc, #summary-total-usd, #summary-avg, #summary-spend{
-    font-size: 1rem;
+    font-size: 4vw;
     flex-direction: column;
   }
 
   #summary-realized, #summary-alltime, #summary-unrealized{
-    font-size: 1rem;
+    font-size: 4vw;
   }
 
   #summary-total-usd, #summary-spend{
@@ -1612,11 +1668,11 @@ input:focus{
   }
 
   .summary-title{
-    font-size: 1.4rem;
+    font-size: 5vw;
   }
 
   .weight-summary-title{
-    font-size: 1rem;
+    font-size: 4vw;
   }
 
   .summary-colon{

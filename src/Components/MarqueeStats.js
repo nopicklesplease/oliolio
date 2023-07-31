@@ -83,13 +83,13 @@ const MarqueeStats = () => {
                 <>
                     <span className='summary-title'>
                     Total BTC</span>: 
-                    { btcTotal().toFixed(8) }
+                    <i className="fa-solid fa-bitcoin-sign fa-xs" style={{marginLeft: '.25rem', marginRight: '.15rem'}}></i>{ btcTotal().toFixed(8) }
 
                     <i style={{ marginLeft: '1rem', marginRight: '1rem', color: '#33bbce' }} className="fa-solid fa-diamond fa-xs"></i>
 
-                    <span className='summary-title'>
-                        USD Value
-                    </span>: 
+                    <span className='summary-title' style={{ marginRight: '.25rem' }}>
+                        USD Value:
+                    </span> 
 
                     { custLocaleString(usdTotal()) }
 

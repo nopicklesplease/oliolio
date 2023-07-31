@@ -56,8 +56,6 @@ const CreateEntry = ({ editCheckClose }) => {
 
     const entryHash = useLocation().hash;
     const id = entryHash.slice(14, entryHash.length);
-    
-    console.log(isSale)
 
     const create = async(ev) => {
         ev.preventDefault();
@@ -79,7 +77,7 @@ const CreateEntry = ({ editCheckClose }) => {
 
     return(
 
-        <div id='create-entry-container'>
+        <>
             
             <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Entry Type</InputLabel>
@@ -241,7 +239,7 @@ const CreateEntry = ({ editCheckClose }) => {
                     </div>
 
                 </form> }
-        </div>
+        </>
     );
 };
 

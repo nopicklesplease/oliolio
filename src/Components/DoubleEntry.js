@@ -124,9 +124,6 @@ const SingleEntry = () => {
 <div className='entry-line-title'>
     <div className='small-type-date-title'>
 
-    <div id='entry-title-del'>
-        DEL
-    </div>
     <div id='entry-title-type'>
         TYPE
     </div>
@@ -134,9 +131,6 @@ const SingleEntry = () => {
     <div id='entry-title-datetime-container'>
         <div id='entry-title-date'>
             DATE
-        </div>
-        <div id='entry-title-time'>
-            TIME
         </div>
     </div>
 
@@ -176,10 +170,6 @@ const SingleEntry = () => {
 
                             <div className='small-type-date'>
 
-                                <div id='entry-delete-container' onClick={ ev => _destroyEntry(entry) }>
-                                    <i style={{ marginLeft: '.5rem' }} className="fa-regular fa-trash-can fa-2x"></i> 
-                                </div>
-
                                 <div id='entry-type-container'>
                                     <div id={ 'entry-type' }>
                                         { entry.isSale ? 
@@ -196,12 +186,10 @@ const SingleEntry = () => {
 
                                 <div id="entry-date-container">
                                     <div id='entry-date-inner-container'>
-                                        <div className='entry-li' id='entry-date'>
+                                        <div id='entry-date'>
                                             { entry.createdAt.slice(0, 10) } 
                                         </div>
-                                        <div className='entry-li' id='entry-time'>
-                                            { entry.createdAt.slice(11, 19) }
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
