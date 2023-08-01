@@ -361,7 +361,7 @@ const DoubleWallet = () => {
 
             <div id='delete-wallet-title' onClick={ () => editCheck('Delete Wallet') }> 
                 <span>
-                    Delete Wallet
+                    DELETE WALLET
                 </span>
             </div>
 
@@ -455,7 +455,7 @@ const DoubleWallet = () => {
 
                     {popupTitle.includes('Create') && (
                         <div className="modalContainer">
-                            <div ref={ popupWindow } id='create-entry-container'>
+                            <div id='create-entry-container'>
                             <CreateEntry editCheckClose={ editCheckClose }/>
                             </div>
                         </div>

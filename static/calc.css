@@ -62,11 +62,11 @@ section{
 }
 
 .btn.operator{
-    background-color: rgb(252, 141, 12);
+    background-color: #fc8d0c;
 }
 
 .btn.operator:hover{
-    background-color: rgb(255, 191, 62);
+    background-color: #ffbf3e;
 }
 
 .btn.number, .btn.decimal{
@@ -94,3 +94,46 @@ section{
     padding-left: 18px;
     text-align: left;   
 }
+
+.modalBackground-dark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    color: white;
+  }
+  
+  .modalContainer-dark {
+    width: 80%;
+    max-width: 600px;
+    background: #121212;
+    padding: 30px;
+    box-sizing: border-box;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid white;
+    box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-p{
+    margin-bottom: 1rem;
+  }
+
+  .modal-plus{
+    padding-top: .25rem;
+    padding-left: .25rem;
+    padding-right: .3rem;
+    margin-left: .25rem;
+    margin-right: .25rem;
+    background-color: #fc8d0c;
+    color: black;
+    border-radius: 50px;
+    font-weight: 500;
+  }

@@ -256,7 +256,7 @@ const SingleEntry = () => {
                 <div id='back-to-wallet-title'> 
                     <span>
                         <Link to={ `#/api/wallets/${ wallet.id }` }>
-                            Back to { wallet.name }
+                            BACK TO WALLET
                         </Link>
                     </span>
                 </div>

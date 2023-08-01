@@ -79,28 +79,28 @@ const Summary = () => {
                 <div id='total-values-container' className='entry-line'>
 
                     <div id='summary-total-btc'>
-                        <span className='summary-title' style={{ color: 'orange' }}>BTC Total</span><span className='summary-colon'>:</span> 
-                        <span className='summary-stat'><i className="fa-solid fa-bitcoin-sign fa-xs" style={{marginRight: '.25rem'}}></i>{ btcTotal().toFixed(8) }</span>
+                        <span className='summary-title' style={{ color: 'orange' }}>BTC Total<span className='summary-colon'>:</span></span> 
+                        <span className='summary-stat'><i className="fa-solid fa-bitcoin-sign fa-xs" style={{marginLeft: '.25rem', marginRight: '.25rem'}}></i>{ btcTotal().toFixed(8) }</span>
                     </div>
 
                     <div id='summary-total-usd'>
-                        <span className='summary-title' style={{color: '#33bbce'}}>USD Value</span><span className='summary-colon'>:</span> <span className='summary-stat'>{ custLocaleString(usdTotal()) }</span>
+                        <span className='summary-title' style={{color: '#33bbce'}}>USD Value<span className='summary-colon'>:</span></span> <span className='summary-stat'>{ custLocaleString(usdTotal()) }</span>
                     </div>
                 </div>
 
                 <div id='summary-avgspend-container' className='entry-line'>
-                    { (_entries.length > 0) ? (
+                    { (_entries.length > 0) && (
                         <div id='summary-avg'>
-                            <span className='summary-title'>USD Avg.</span><span className='summary-colon'>:</span> 
+                            <span className='summary-title'>USD Avg.<span className='summary-colon'>:</span></span>
                             <span className='summary-stat'>{ custLocaleString(usdAvg()) }</span>
                         </div>) 
-                    : '' }
+                    }
 
-                    { (_entries.length > 0) ? (
+                    { (_entries.length > 0) && (
                         <div id='summary-spend'>
-                            <span className='summary-title'>USD Spend</span><span className='summary-colon'>:</span> <span className='summary-stat'>{ custLocaleString(usdSpend()) }</span>
+                            <span className='summary-title'>USD Spend<span className='summary-colon'>:</span></span> <span className='summary-stat'>{ custLocaleString(usdSpend()) }</span>
                         </div>
-                    ) : ''}
+                    )}
                 </div>
 
                 { (_entries.length > 0 && (

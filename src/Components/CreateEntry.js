@@ -9,15 +9,16 @@ import { InputAdornment, MenuItem } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
-import { red } from '@mui/material/colors';
 
 const SelectStyled = styled(Select)({
     label: {
         color: 'red'
     },
-    "& label.Mui-focused": {
-        color: "orange"
-      },
+    // "& label": {
+    //     "&.Mui-focused":{
+    //         color: 'black'
+    //     }
+    // },
     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
         borderColor: 'orange',
     }
@@ -80,10 +81,10 @@ const CreateEntry = ({ editCheckClose }) => {
         <>
             
             <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Entry Type</InputLabel>
+        <InputLabel id="demo-simple-select-label" style={{color: '#999999'}}>Type</InputLabel>
         <SelectStyled
             sx={{
-                backgroundColor: 'white'
+                backgroundColor: 'white',
             }}   
             labelId="demo-simple-select-label"
             id="demo-simple-select"

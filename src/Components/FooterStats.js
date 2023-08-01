@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { destroyWallet, updateWallet } from '../store';
@@ -19,6 +19,9 @@ const WalletStats = () => {
 
     const [name, setName] = useState('');
     const [editNameToggle, setEditNameToggle] = useState(true);
+    const [showMore, setShowMore] = useState(false);
+
+    console.log('showing more', showMore);
 
     const toggleNameInput = () => {
         setEditNameToggle(false);
@@ -105,25 +108,31 @@ const WalletStats = () => {
     }
 
     return(
-        <>
+        <div onClick={ () => setShowMore(!showMore) }>
                         <div className='ft-totalBTC'>
 
 
-                        <span className='ft-summary-title'>Total BTC</span>: { btcTotal().toFixed(8) } {btcSubtotal > 0 && <span style={{marginLeft: '.25rem'}}>@ { custLocaleString(usdAvg()) }</span>}
+                        <span className='ft-summary-title'>BTC Total</span>: { btcTotal().toFixed(8) } {btcSubtotal > 0 && <span style={{marginLeft: '.25rem'}}>@ { custLocaleString(usdAvg()) }</span>}
                 </div>
             <div id='ft-summary-container-small'>
                 <div className='ft-title-alltime'>
                     <div id='ft-stats-title'>
-                        <div className='ft-summary-total-usd' style={{marginBottom: '.15rem'}}>
-                            <span className='ft-summary-title' style={{ color: '#33bbce' }}>USD Value</span>: { custLocaleString(usdTotal()) }
+                        <div className='ft-summary-total-usd'>
+                            <span className='ft-summary-title' style={{ color: '#33bbce' }}>USD Value:</span> { custLocaleString(usdTotal()) }
                         </div>
                         <div className='ft-summary-total-usd'>
-                            <span className='ft-summary-title' style={{color: 'orange'}}>USD Spend</span>: { custLocaleString(usdSpend()) }
+                            <span className='ft-summary-title' style={{color: 'orange'}}>USD Spend:</span> { custLocaleString(usdSpend()) }
                         </div>
+                        {showMore === true && (
+                            <div className='ft-summary-total-usd'>
+                            <span className='ft-summary-title'>USD Avg.:</span> { custLocaleString(usdAvg()) }
+                        </div>
+                        )}
 
                     </div>
 
                         { (soldTotal >= 0) && (
+                            <div className='ft-summary-body'>
                             <div id='ft-summary-alltime' className='entry-line'>
 
                             <span className='ft-summary-title'>Unrealized +/-</span>: <span className={ (usdDiff() >= 0) ? 'pos-num' : 'neg-num'} id='summary-unrealized'>
@@ -133,7 +142,28 @@ const WalletStats = () => {
                                 </span>
 
                             </div>
+
+                            {showMore === true && (
+                                <div className='ft-summary-showMore-body'>
+                                <div id='ft-summary-alltime' className='entry-line'>
+
+                                <span className='ft-summary-title'>Realized +/-</span>: <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
+    
+                                </div>
+
+                                <div id='ft-summary-alltime' className='entry-line'>
+
+                                <span className='ft-summary-title'>All-Time +/-</span>: <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
+
+                                </div>
+
+                                </div>
+                                
+                            )}
+
+                            </div>
                         ) }
+
                 </div>
 
             {/* { (_entries.length > 0) ? (
@@ -150,7 +180,7 @@ const WalletStats = () => {
             ) : '' } */}
             
             </div>
-        </>
+        </div>
     );
 };
 
