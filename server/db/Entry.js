@@ -31,6 +31,9 @@ const Entry = conn.define('entry', {
     soldBtc: {
         type: DECIMAL(10, 8)
     },
+    soldAvg: {
+        type: DECIMAL(10, 2)
+    },
     isSale: {
         type: BOOLEAN,
         defaultValue: false,

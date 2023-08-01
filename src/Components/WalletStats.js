@@ -19,6 +19,8 @@ const WalletStats = () => {
     const [name, setName] = useState('');
     const [editNameToggle, setEditNameToggle] = useState(true);
 
+    console.log('entries that be sold', soldEntries);
+
     const toggleNameInput = () => {
         setEditNameToggle(false);
     }

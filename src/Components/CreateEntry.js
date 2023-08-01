@@ -45,7 +45,7 @@ const CloseButtonStyled = styled(Button)({
     },
 })
 
-const CreateEntry = ({ editCheckClose }) => {
+const CreateEntry = ({ usdAvg, editCheckClose }) => {
 
     const [volume, setVolume] = useState('');
     const [price, setPrice] = useState('');
@@ -69,7 +69,7 @@ const CreateEntry = ({ editCheckClose }) => {
 
     const sell = async(ev) => {
         ev.preventDefault();
-        await dispatch(createEntry({ soldBtc, price, walletId: id, isSale: true }));
+        await dispatch(createEntry({ soldBtc, price, walletId: id, isSale: true, soldAvg: usdAvg() }));
         dispatch(fetchEntries());
         setSoldBtc('');
         setPrice('');

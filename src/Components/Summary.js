@@ -110,9 +110,7 @@ const Summary = () => {
 
                 { (_entries.length > 0) ? (
                     <div style={{marginBottom: '1.5rem'}}>
-                        <span className='weight-summary-title'>Unrealized +/- :</span> 
-                        
-                        <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc()) })</span>
+                        <span className='weight-summary-title'>Unrealized +/- :</span> <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc()) })</span>
                     </div>
                 ) : '' }
 
