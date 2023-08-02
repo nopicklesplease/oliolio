@@ -487,6 +487,16 @@ input:focus{
   margin-right: .25rem;
 }
 
+.ft-symbols{
+  padding-bottom: 1.28rem;
+  margin-right: .25rem;
+  margin-left: .5rem;
+}
+
+.ft-summarytotal-text{
+  font-size: 3vw;
+}
+
 .weight-summary-title{
   font-weight: 700;
 }
@@ -1312,7 +1322,7 @@ input:focus{
 .ft-totalBTC{
   display: none;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
   background-color: var(--gold);
   padding: .75rem;
@@ -1464,6 +1474,10 @@ input:focus{
 
 
 @media screen and (max-width: 1024px) {
+
+  #ft-summary-container-small{
+    display: block;
+  }
 
   #entry-na-container, #entry-sold-container{
     flex: 1;

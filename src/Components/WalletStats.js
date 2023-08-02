@@ -19,8 +19,6 @@ const WalletStats = () => {
     const [name, setName] = useState('');
     const [editNameToggle, setEditNameToggle] = useState(true);
 
-    console.log('entries that be sold', soldEntries);
-
     const toggleNameInput = () => {
         setEditNameToggle(false);
     }
@@ -46,10 +44,23 @@ const WalletStats = () => {
         return acc;
     }, 0);
 
-    const soldTotal = _entries.filter(entry => (entry.isSale)).map(entry => (entry.soldBtc * entry.price) ).reduce((acc, val) => {
+    const posPerc = (num) => {
+        return num > 0 ? (num - 1) : num;
+    }
+
+    const _soldEntries = _entries.filter(entry => entry.isSale);
+
+    const soldTotal = _soldEntries.map(entry => (entry.soldBtc * entry.price) ).reduce((acc, val) => {
         acc += val * 1;
         return acc;
     }, 0);
+
+    const soldAvg = _soldEntries.map(entry => (entry.soldBtc * entry.soldAvg)).reduce((acc, val) => {
+        acc += val * 1;
+        return acc;
+    }, 0)
+
+    const soldAvgPerc = ((soldTotal / soldAvg)*1)-1;
 
     const soldBtcTotal = _entries.filter(entry => (entry.isSale)).map(entry => (entry.soldBtc) ).reduce((acc, val) => {
         acc += val * 1;
@@ -137,7 +148,7 @@ const WalletStats = () => {
                 <div id='realized-unrealized-container' className='entry-line'>
                     {(soldEntries.length > 0) &&
                     <div id='summary-realized-title'>
-                        <span className='summary-title'>Realized +/-</span>: <span className={ (soldTotal >= 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
+                        <span className='summary-title'>Realized +/-</span>: <span className={ (soldAvgPerc >= 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) } ({ custPerc(soldAvgPerc)})</span>
                     </div> 
                     }
                     <div id='summary-unrealized-title'>

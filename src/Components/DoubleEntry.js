@@ -97,6 +97,10 @@ const SingleEntry = () => {
     }
 
     document.addEventListener('mousedown', closePopupWindow)
+    
+    const posPerc = (num) => {
+        return num > 0 ? (num - 1) : num;
+    }
 
     if(!wallet){
         return null;
@@ -224,11 +228,14 @@ const SingleEntry = () => {
                                                 </div>
                                             </div> 
                                         : 
-                                            <div id="entry-sold-container" className='sell-entry'>
-                                                <div id='entry-usd-value'>
-                                                    { custLocaleString((entry.soldBtc * entry.price)) }
-                                                </div>
-                                            </div>  
+                                        <div id="entry-value-volume-container" className={ (((entry.soldBtc * entry.price)-(entry.soldBtc * entry.soldAvg)) > 0) ? 'pos-num' : 'neg-num' }>
+                                        <div id='entry-usd-value'>
+                                            { custLocaleString((entry.soldBtc * entry.price)) }
+                                        </div>
+                                        <div id='entry-volume'>
+                                            { custLocaleString(entry.soldBtc * entry.soldAvg) }
+                                        </div>
+                                    </div> 
                                         }
 
                                         { entry.soldBtc === null ?  
@@ -241,11 +248,14 @@ const SingleEntry = () => {
                                                 </div>
                                             </div> 
                                         :
-                                            <div id="entry-na-container" className='sell-entry'>
-                                                <div>
-                                                    N/A
-                                                </div>
-                                            </div>
+                                        <div id="entry-diff-container" className={ (((entry.soldBtc * entry.price)-(entry.soldBtc * entry.soldAvg)) > 0) ? 'pos-num' : 'neg-num' }>
+                                        <div id='entry-usd-diff'>
+                                            { custLocaleString(((entry.soldBtc * entry.price)-(entry.soldBtc * entry.soldAvg))) }
+                                        </div>
+                                        <div id='entry-diff-perc'>
+                                            { custPerc(posPerc(((entry.soldBtc * entry.price)/(entry.soldBtc * entry.soldAvg))*1)) }
+                                        </div>
+                                    </div>  
                                         }
                                 
                             </div>

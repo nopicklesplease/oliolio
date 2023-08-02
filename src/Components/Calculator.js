@@ -132,7 +132,9 @@ const Calculator = () => {
                 <div className='modalBackground-dark'>
                     <h1>WELCOME</h1>
                     <div ref={ popupWindow } className='modalContainer-dark'>
-                        <div className='modal-p'>Just-A-Calculator is a Bitcoin portfolio tracker camouflaged as an iOS calculator. It is currently in beta testing mode.</div>
+                        <div className='modal-p'>Just-A-Calculator is a Bitcoin portfolio tracker camouflaged as an iOS calculator.</div>
+
+                        <div className='modal-p'>It is currently in beta testing mode. Please excuse any imperfections.</div>
 
                         <div className='modal-p'>Click the <span className='modal-plus'>+</span> button five times to access the hidden log in.</div>
 

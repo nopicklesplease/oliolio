@@ -13,10 +13,23 @@ const Summary = () => {
         return acc;
     }, 0);
 
-    const soldTotal = _entries.filter(entry => (entry.isSale)).map(entry => (entry.soldBtc * entry.price) ).reduce((acc, val) => {
+    const posPerc = (num) => {
+        return num > 0 ? (num - 1) : num;
+    }
+
+    const _soldEntries = _entries.filter(entry => entry.isSale);
+
+    const soldTotal = _soldEntries.map(entry => (entry.soldBtc * entry.price) ).reduce((acc, val) => {
         acc += val * 1;
         return acc;
     }, 0);
+
+    const soldAvg = _soldEntries.map(entry => (entry.soldBtc * entry.soldAvg)).reduce((acc, val) => {
+        acc += val * 1;
+        return acc;
+    }, 0)
+
+    const soldAvgPerc = ((soldTotal / soldAvg)*1)-1;
 
     const soldBtcTotal = _entries.filter(entry => (entry.isSale)).map(entry => (entry.soldBtc) ).reduce((acc, val) => {
         acc += val * 1;
@@ -108,23 +121,23 @@ const Summary = () => {
                     </div>
                 ))}
 
-                { (_entries.length > 0) ? (
+                { (_entries.length > 0) && (
                     <div style={{marginBottom: '1.5rem'}}>
                         <span className='weight-summary-title'>Unrealized +/- :</span> <span className={ (usdDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-unrealized'>{ custLocaleString(usdDiff()) } ({ custPerc(usdPerc()) })</span>
                     </div>
-                ) : '' }
+                ) }
 
-                { (soldTotal > 0) ? (
+                { (soldTotal > 0) && (
                     <div style={{marginBottom: '1.5rem'}}>
-                        <span className='weight-summary-title' >Realized +/- :</span> <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) }</span>
+                        <span className='weight-summary-title' >Realized +/- :</span> <span className={ (soldAvgPerc >= 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) } ({ custPerc(soldAvgPerc) })</span>
                     </div>
-                ) : '' }
+                ) }
 
-                { (soldTotal > 0) ? (
+                { (soldTotal > 0) && (
                     <div style={{marginBottom: '.5rem'}}>
                         <span className='weight-summary-title'>All-Time +/- :</span> <span className={ (allTimeDiff() > 0) ? 'pos-num' : 'neg-num' } id='summary-alltime'>{ custLocaleString(allTimeDiff()) } ({ custPerc(allTimePerc())})</span>
                     </div>
-                ) : '' }
+                ) }
             </div>
         </>
     );
