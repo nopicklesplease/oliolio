@@ -164,7 +164,7 @@ const WalletStats = (width) => {
                                 <div className='ft-summary-showMore-body'>
                                 <div id='ft-summary-alltime' className='entry-line'>
 
-                                <span className='ft-summary-title'>Realized +/-</span>: <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) } ({ custPerc(soldAvgPerc)})</span>
+                                <span className='ft-summary-title'>Realized +/-</span>: <span className={ (soldTotal >= 0) ? 'pos-num' : 'neg-num' } id='summary-realized'> {_soldEntries.length > 0 ? <>{ custLocaleString(soldTotal) } ({ custPerc(soldAvgPerc)})</> : 'N/A'}</span>
     
                                 </div>
 
@@ -221,7 +221,7 @@ const WalletStats = (width) => {
                 <div className='ft-summary-showMore-body'>
                 <div id='ft-summary-alltime' className='entry-line'>
 
-                <span className='ft-summary-title'>Realized +/-</span>: <span className={ (soldTotal > 0) ? 'pos-num' : 'neg-num' } id='summary-realized'>{ custLocaleString(soldTotal) } ({ custPerc(soldAvgPerc)})</span>
+                <span className='ft-summary-title'>Realized +/-</span>: <span className={ (soldTotal >= 0 ) ? 'pos-num' : 'neg-num' } id='summary-realized'>{_soldEntries.length > 0 ? <>{ custLocaleString(soldTotal) } ({ custPerc(soldAvgPerc)})</> : 'N/A'}</span>
 
                 </div>
 
