@@ -130,7 +130,7 @@ const Calculator = () => {
             </section>
             {isPopupVisible && (
                 <div className='modalBackground-dark'>
-                    <h1>WELCOME</h1>
+                    <div className='landingWelcome'>WELCOME</div>
                     <div ref={ popupWindow } className='modalContainer-dark'>
                         <div className='modal-p'>Just-A-Calculator is a Bitcoin portfolio tracker camouflaged as an iOS calculator.</div>
 

@@ -35,6 +35,11 @@ input:focus{
   outline: none;
 }
 
+.landingWelcome{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
 #content-body{
   display: flex;
   height: 100%;
