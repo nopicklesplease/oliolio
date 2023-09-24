@@ -12,6 +12,16 @@ Pressing the '+' key on the calculator five times unveils a login screen to acce
 npm i
 npm run start:dev
 ```
+</br>
+
+Create a file named '.env' in your root directory with the following parameter:
+```
+API_KEY=[YOUR COINMARKETCAP API KEY]
+```
+
+Go to https://coinmarketcap.com/api/ to generate your own CoinMarketCap API key.
+
+</br>
 
 ### Technology Stack
 
