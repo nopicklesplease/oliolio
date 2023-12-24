@@ -24,57 +24,7 @@ function getRandom(arr) {
 // })
 
 const syncAndSeed = async()=> {
-  await conn.sync({ force: true });
-
-  const [moe, lucy, larry] = await Promise.all([
-    User.create({ password: '123', email: 'moe@moe.com' }),
-    User.create({ password: '123', email: 'lucy@lucy.com' }),
-    User.create({ password: '123', email: 'larry@larry.com'  }),
-  ]);
-
-  const [walletA, walletB, walletC, walletD, walletE, walletF, walletG] = await Promise.all([
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-    Wallet.create({ name: faker.company.catchPhraseAdjective() + ' ' + 'Wallet', userId: getRandom([moe, lucy, larry]).id }),
-  ]);
-
-  const fakeEntry = () => {
-    const volume = faker.datatype.float({min: 10.0, max: 2000.0, precision: .01})
-    const price = faker.datatype.float({min: 15800.0, max: 30890.0, precision: .01})
-    const walletId = getRandom([walletA, walletB, walletC, walletD, walletE, walletF, walletG]).id
-    
-    return{
-      volume,
-      price,
-      walletId
-    }
-  }
-
-  await Promise.all(fakeEntries.map(async() => {
-    await Entry.create({ volume, price, walletId } = fakeEntry())
-  }))
-
-
-  return {
-    users: {
-      moe,
-      lucy,
-      larry
-    },
-    wallets: {
-      walletA,
-      walletB,
-      walletC,
-      walletD,
-      walletE,
-      walletF,
-      walletG
-    }
-  };
+  await conn.sync({ force: false });
 };
 
 

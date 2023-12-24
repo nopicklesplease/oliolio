@@ -121,6 +121,7 @@ const CreateEntry = ({ usdAvg, editCheckClose }) => {
                         value={ volume } 
                         label='Volume (USD)'
                         type='number'
+                        step={0.5}
                         InputProps={{
                             startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-dollar-sign"></i></InputAdornment>
                         }}
@@ -138,6 +139,7 @@ const CreateEntry = ({ usdAvg, editCheckClose }) => {
                             value={ price } 
                             label='Price (USD)'
                             type='number'
+                            step={0.5}
                             InputProps={{
                                 startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-dollar-sign"></i></InputAdornment>
                             }}
@@ -188,6 +190,7 @@ const CreateEntry = ({ usdAvg, editCheckClose }) => {
                         value={ soldBtc } 
                         label='Volume (BTC)'
                         type='number'
+                        step={0.5}
                         InputProps={{
                             startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-bitcoin-sign"></i></InputAdornment>
                         }}
@@ -205,6 +208,7 @@ const CreateEntry = ({ usdAvg, editCheckClose }) => {
                         value={ price } 
                         label='Price (USD)'
                         type='number'
+                        step={0.5}
                         InputProps={{
                             startAdornment: <InputAdornment sx={{paddingLeft: '.25rem'}} position='start'><i className="fa-solid fa-dollar-sign"></i></InputAdornment>
                         }}
