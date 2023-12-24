@@ -20,12 +20,12 @@ const App = ()=> {
     dispatch(fetchUsers());
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-        dispatch(fetchBtc());
-    }, 60*1000);
-    return () => clearInterval(interval);
-}, [])
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//         dispatch(fetchBtc());
+//     }, 60*1000);
+//     return () => clearInterval(interval);
+// }, [])
 
   return (
     <div>
